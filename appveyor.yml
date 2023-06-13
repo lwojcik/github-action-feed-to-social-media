@@ -1,0 +1,23 @@
+image: Ubuntu2004
+platform: x64
+stack: node 16
+
+install:
+  - npm install
+
+build_script:
+  - npm run build
+  - npm run format
+  - npm run lint
+  - npm run package
+  - npm run test:cov
+
+test_script:
+  - curl https://keybase.io/codecovsecurity/pgp_keys.asc | gpg --no-default-keyring --keyring trustedkeys.gpg --import > /dev/null
+  - curl -Os https://uploader.codecov.io/latest/linux/codecov > /dev/null
+  - curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM > /dev/null
+  - curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM.sig > /dev/null
+  - gpgv codecov.SHA256SUM.sig codecov.SHA256SUM
+  - shasum -a 256 -c codecov.SHA256SUM
+  - chmod +x codecov
+  - ./codecov --disable=gcov

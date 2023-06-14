@@ -70,4 +70,4 @@ inputs:
     description: 'Webhook URL to use for posting messages to Slack'
 runs:
   using: 'node16'
-  main: 'dist/index.js'
+  main: 'lib/index.js'

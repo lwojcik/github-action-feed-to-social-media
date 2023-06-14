@@ -14,7 +14,7 @@
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
     "lint": "eslint src/**/*.ts",
-    "package": "ncc build --source-map --license licenses.txt",
+    "package": "ncc build --source-map -o dist --license licenses.txt",
     "test": "jest",
     "test:cov": "jest --coverage --collectCoverageFrom='src/**/*.ts'",
     "all": "npm run format && npm run lint && npm test && npm run build"

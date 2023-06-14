@@ -309,7 +309,7 @@ exports.fetchLatestFeedItem = fetchLatestFeedItem;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.postToSocialMedia = exports.isFeedItemNewer = exports.a = exports.convertArrayToObject = exports.stripHTML = void 0;
+exports.postToSocialMedia = exports.isFeedItemNewer = exports.convertArrayToObject = exports.stripHTML = void 0;
 const twitter_1 = __nccwpck_require__(2192);
 const mastodon_1 = __nccwpck_require__(7278);
 const types_1 = __nccwpck_require__(8164);
@@ -330,7 +330,6 @@ const convertArrayToObject = (arr) => {
     return result;
 };
 exports.convertArrayToObject = convertArrayToObject;
-exports.a = 'lol';
 const isFeedItemNewer = ({ feedItem, cachedItem, }) => {
     if (feedItem && cachedItem) {
         return feedItem.published > cachedItem.published;

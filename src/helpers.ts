@@ -24,6 +24,8 @@ export const convertArrayToObject = (
   return result;
 };
 
+export const a = 'lol';
+
 export const isFeedItemNewer = ({
   feedItem,
   cachedItem,

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Post latest RSS / Atom feed item to multiple social platforms (e.g. Mastodon, Twitter, Discord)",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "concurrently \"npm run watch\" \"npm run package -- --watch\"",
     "build": "tsc",
@@ -14,7 +14,8 @@
     "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
     "test:cov": "jest --coverage --collectCoverageFrom='src/**/*.ts'",
-    "all": "npm run format && npm run lint && npm test && npm run build && npm run package"
+    "all": "npm run format && npm run lint && npm test && npm run build && npm run package",
+    "updateTag": "git tag -fa v1 -m \"Update v1 tag\" && git push origin v1 --force"
   },
   "repository": {
     "type": "git",

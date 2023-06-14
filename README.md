@@ -235,7 +235,7 @@ Sample status:
 
 1. **Can this Action support posting to [insert platform name here]?**
 
-General answer to this question is: **yes, as long as the platform offers publicly available API for posting text messages**. The architecture of the Action makes it possible to extend it with new services by in a consistent way.
+General answer to this question is: **yes, as long as the platform offers publicly available API for posting text messages**. The architecture of the Action makes it possible to extend it with new services in a consistent way.
 
 **But.**
 

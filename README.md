@@ -62,7 +62,7 @@ jobs:
           # Discord settings
           discordEnable: true
           discordWebhookUrl: 'DISCORD_WEBHOOK_URL'
-          # Discord settings
+          # Slack settings
           slackEnable: true
           slackWebhookUrl: 'DISCORD_WEBHOOK_URL'
 

@@ -5,8 +5,8 @@
   "description": "Post latest RSS / Atom feed item to multiple social platforms (e.g. Mastodon, Twitter, Discord)",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "concurrently \"npm run watch\" \"npm run package -- --watch\"",
-    "build": "tsc",
+    "start": "npx ncc run ./src/index.ts",
+    "build": "npx ncc build ./src/index.ts",
     "watch": "tsc --watch",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",

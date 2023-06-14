@@ -3,6 +3,9 @@ name: Publish a release
 on:
   release:
     types: [published, edited]
+  pull_request_target:
+    branches:
+      - 'main'
 
 jobs:
   build:

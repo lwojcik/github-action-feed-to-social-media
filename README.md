@@ -62,7 +62,7 @@ jobs:
           # Discord settings
           discordEnable: true
           discordWebhookUrl: 'DISCORD_WEBHOOK_URL'
-          # Discord settings
+          # Slack settings
           slackEnable: true
           slackWebhookUrl: 'DISCORD_WEBHOOK_URL'
 
@@ -85,10 +85,10 @@ To store sensitive information (e.g. access tokens) use [Encrypted Secrets](http
  - name: Feed to social media
     uses: lwojcik/github-action-feed-to-social-media@v1
     with:
-      feedUrl: 'https://offbeatbits.com/excerpts.xml'
+      feedUrl: 'https://example.org/your-feed-url.xml'
       # Mastodon settings
       mastodonEnable: true
-      mastodonInstance: 'https://mas.to'
+      mastodonInstance: 'https://your-mastodon-instance-url.example.org'
       mastodonAccessToken: ${{ secrets.MASTODON_ACCESS_TOKEN }}
 ```
 
@@ -235,7 +235,7 @@ Sample status:
 
 1. **Can this Action support posting to [insert platform name here]?**
 
-General answer to this question is: **yes, as long as the platform offers publicly available API for posting text messages**. The architecture of the Action makes it possible to extend it with new services by in a consistent way.
+General answer to this question is: **yes, as long as the platform offers publicly available API for posting text messages**. The architecture of the Action makes it possible to extend it with new services in a consistent way.
 
 **But.**
 

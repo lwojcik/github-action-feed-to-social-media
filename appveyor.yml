@@ -6,11 +6,10 @@ install:
   - npm install
 
 build_script:
-  - npm run build
   - npm run format
   - npm run lint
-  - npm run package
   - npm run test:cov
+  - npm run build
 
 test_script:
   - curl https://keybase.io/codecovsecurity/pgp_keys.asc | gpg --no-default-keyring --keyring trustedkeys.gpg --import > /dev/null

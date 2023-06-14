@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Post latest RSS / Atom feed item to multiple social platforms (e.g. Mastodon, Twitter, Discord)",
-  "main": "./dist",
+  "main": "lib/index.js",
   "scripts": {
     "dev": "concurrently \"npm run watch\" \"npm run package -- --watch\"",
     "build": "tsc",
@@ -11,7 +11,7 @@
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
     "lint": "eslint src/**/*.ts",
-    "package": "ncc build lib -o dist --source-map --license licenses.txt",
+    "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
     "test:cov": "jest --coverage --collectCoverageFrom='src/**/*.ts'",
     "all": "npm run format && npm run lint && npm test && npm run build && npm run package"

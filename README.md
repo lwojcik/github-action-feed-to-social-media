@@ -85,10 +85,10 @@ To store sensitive information (e.g. access tokens) use [Encrypted Secrets](http
  - name: Feed to social media
     uses: lwojcik/github-action-feed-to-social-media@v1
     with:
-      feedUrl: 'https://offbeatbits.com/excerpts.xml'
+      feedUrl: 'https://example.org/your-feed-url.xml'
       # Mastodon settings
       mastodonEnable: true
-      mastodonInstance: 'https://mas.to'
+      mastodonInstance: 'https://your-mastodon-instance-url.example.org'
       mastodonAccessToken: ${{ secrets.MASTODON_ACCESS_TOKEN }}
 ```
 

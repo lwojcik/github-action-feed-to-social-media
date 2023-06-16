@@ -1,7 +1,5 @@
 # GitHub Action: Feed to Social Media
 
-[![Build status](https://ci.appveyor.com/api/projects/status/d8i9g7c4ya7sr03p/branch/main?svg=true)](https://ci.appveyor.com/project/lwojcik/github-action-feed-to-social-media/branch/main) [![codecov](https://codecov.io/github/lwojcik/github-action-feed-to-social-media/branch/main/graph/badge.svg?token=VkGBrPHbWA)](https://codecov.io/github/lwojcik/github-action-feed-to-social-media)
-
 This GitHub Action selects latest item from RSS / Atom feed and posts it to one or more social media sites.
 
 Supported platforms:
@@ -17,7 +15,7 @@ This GitHub Action is heavily inspired by [Any Feed to Mastodon GitHub Action](h
 
 - only one feed item is posted each time. This Action isn't suitable for fast-moving feeds that burst multiple new items on each check and that's intentional.
 
-- published posts can use custom formatting. Example: `'New article: {article} {link} #someHashtag`
+- published posts can use custom formatting. Example: `New article: {article} {link} #someHashtag`
 
 ## Usage
 

@@ -4,7 +4,7 @@ import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { config } from './config';
 import { logger } from './logger';
 
-export class Cache<T> {
+export class Cache<T = Record<string, unknown>> {
   name: string;
   private cacheDir: string;
   private cacheFilePath: string;
@@ -33,7 +33,7 @@ export class Cache<T> {
     return readFileSync(this.cacheFilePath, {
       encoding: 'utf8',
       flag: 'r',
-    }) as T;
+    });
   }
 
   private writeToCache(content: string) {
@@ -48,9 +48,9 @@ export class Cache<T> {
 
       const content = this.readCache();
 
-      logger.debug(`Retrieved cached item title: ${JSON.stringify(content)}`);
+      logger.debug(`Retrieved cached item title: ${content}`);
 
-      return content;
+      return JSON.parse(content) as T;
     }
     logger.warning(`Cache for ${this.name} is empty`);
     return undefined;

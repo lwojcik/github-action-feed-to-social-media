@@ -68,6 +68,9 @@ inputs:
     default: 'false'
   slackWebhookUrl:
     description: 'Webhook URL to use for posting messages to Slack'
+outputs:
+  updateStatus:
+    description: 'Stringified object with update status'
 runs:
   using: 'node16'
   main: 'dist/index.js'

@@ -48,21 +48,21 @@ describe('Cache', () => {
 
     it('should return cached content when cache exists', async () => {
       const CACHE_FILE = 'test-file.json';
-      const EXPECTED_CONTENT = 'expected test content';
+      const EXPECTED_CONTENT = { id: 'expected test content' };
 
-      const testCache = new Cache<string>(CACHE_FILE);
+      const testCache = new Cache(CACHE_FILE);
 
       const existsSyncFn = jest.spyOn(fs, 'existsSync');
       const readFileSyncFn = jest.spyOn(fs, 'readFileSync');
 
       existsSyncFn.mockReturnValue(true);
-      readFileSyncFn.mockReturnValue(EXPECTED_CONTENT);
+      readFileSyncFn.mockReturnValue(JSON.stringify(EXPECTED_CONTENT));
 
       await testCache.set(EXPECTED_CONTENT);
 
       const result = testCache.get();
 
-      expect(result).toBe(EXPECTED_CONTENT);
+      expect(result).toStrictEqual(EXPECTED_CONTENT);
     });
 
     it('should return undefined when no content is cached', () => {

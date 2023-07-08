@@ -84,7 +84,7 @@ runs:
     - name: Feed to social media
       id: feed2sm
       shell: bash
-      run: 'node index.js'
+      run: 'node dist/index.js'
       # uses: ./
       # with:
       #   feedUrl: ${{ inputs.feedUrl }}

@@ -1,11 +1,9 @@
-name: 'Feed To Social Media Composite'
+name: 'Feed To Social Media (core)'
 description: 'Post to social media whenever new item is found in a RSS/Atom feed'
 author: 'Łukasz Wójcik'
-
 branding:
   icon: 'rss'
   color: 'orange'
-
 inputs:
   # General settings
   feedUrl:
@@ -70,41 +68,9 @@ inputs:
     default: 'false'
   slackWebhookUrl:
     description: 'Webhook URL to use for posting messages to Slack'
-
 outputs:
   updateStatus:
     description: 'Stringified object with update status'
-    value: ${{ steps.feed2sm.outputs.updateStatus }}
-
 runs:
-  using: 'composite'
-  steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
-    - name: Feed to social media
-      id: feed2sm
-      uses: ./.github/actions/core
-      with:
-        feedUrl: ${{ inputs.feedUrl }}
-        newestItemStrategy: ${{ inputs.newestItemStrategy }}
-        postFormat: ${{ inputs.postFormat }}
-        mastodonEnable: ${{ inputs.mastodonEnable }}
-        mastodonInstance: ${{ inputs.mastodonInstance }}
-        mastodonAccessToken: ${{ inputs.mastodonAccessToken }}
-        mastodonPostVisibility: ${{ inputs.mastodonPostVisibility }}
-        mastodonMetadataEnable: ${{ inputs.mastodonMetadataEnable }}
-        mastodonMetadataInstance: ${{ inputs.mastodonMetadataInstance }}
-        mastodonMetadataAccessToken: ${{ inputs.mastodonMetadataAccessToken }}
-        mastodonMetadataFieldIndex: ${{ inputs.mastodonMetadataFieldIndex }}
-        twitterEnable: ${{ inputs.twitterEnable }}
-        twitterApiKey: ${{ inputs.twitterApiKey }}
-        twitterApiKeySecret: ${{ inputs.twitterApiKeySecret }}
-        twitterAccessToken: ${{ inputs.twitterAccessToken }}
-        twitterAccessTokenSecret: ${{ inputs.twitterAccessTokenSecret }}
-        discordEnable: ${{ inputs.discordEnable }}
-        discordWebhookUrl: ${{ inputs.discordWebhookUrl }}
-        slackEnable: ${{ inputs.slackEnable }}
-        slackWebhookUrl: ${{ inputs.slackWebhookUrl }}
-
-    - name: Commit and push cache changes
-      uses: stefanzweifel/git-auto-commit-action@v4
+  using: 'node16'
+  main: 'dist/index.js'

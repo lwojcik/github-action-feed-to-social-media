@@ -1,6 +1,10 @@
 import { FeedEntry } from '@extractus/feed-extractor';
 
 export enum ActionInput {
+  // Git
+  ghToken = 'ghToken',
+  gitUsername = 'gitUsername',
+  gitEmail = 'gitEmail',
   // General
   feedUrl = 'feedUrl',
   newestItemStrategy = 'newestItemStrategy',
@@ -34,6 +38,10 @@ export enum ActionInput {
   // Slack
   slackEnable = 'slackEnable',
   slackWebhookUrl = 'slackWebhookUrl',
+}
+
+export enum ActionOutput {
+  updateStatus = 'updateStatus',
 }
 
 export enum SocialService {

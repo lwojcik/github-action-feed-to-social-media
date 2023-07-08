@@ -2,7 +2,12 @@ import { setFailed, setOutput } from '@actions/core';
 import { config } from './config';
 import { createCache } from './cache';
 import { fetchLatestFeedItem } from './feed';
-import { FeedItem, PostSubmitStatus, SocialService } from './types';
+import {
+  ActionOutput,
+  FeedItem,
+  PostSubmitStatus,
+  SocialService,
+} from './types';
 import { logger } from './logger';
 import {
   convertArrayToObject,
@@ -21,6 +26,8 @@ export const runAction = async () => {
 
     const feedItem = await fetchLatestFeedItem(FEED_URL, LATEST_ITEM_STRATEGY);
 
+    logger.debug(JSON.stringify(feedItem));
+
     if (!feedItem) {
       logger.warning('No feed item to fetch!');
 
@@ -30,14 +37,21 @@ export const runAction = async () => {
 
       const outputObject = convertArrayToObject(skippedStatuses);
 
-      setOutput('updateStatus', JSON.stringify(outputObject));
+      setOutput(ActionOutput.updateStatus, JSON.stringify(outputObject));
 
       return;
     }
 
-    const cache = createCache<FeedItem>(CACHE_FILE_NAME);
+    const cache = createCache(CACHE_FILE_NAME);
 
-    const cachedItem = cache.get();
+    const cachedItem = cache.get<FeedItem>();
+
+    if (cachedItem) {
+      logger.debug('Cached item:');
+      logger.debug(JSON.stringify(cachedItem as FeedItem));
+    } else {
+      logger.debug('No cached item found!');
+    }
 
     const shouldPost = isFeedItemNewer({ feedItem, cachedItem });
 
@@ -57,10 +71,10 @@ export const runAction = async () => {
       logger.info(`Updating cache with new feed item...`);
       await cache.set(feedItem);
 
-      setOutput('updateStatus', JSON.stringify(outputObject));
-    }
+      setOutput(ActionOutput.updateStatus, JSON.stringify(outputObject));
 
-    logger.info('No new feed item detected or cache is empty.');
+      return;
+    }
 
     const skippedStatuses = servicesToUpdate.map((service) => ({
       [service]: PostSubmitStatus.skipped,
@@ -69,12 +83,17 @@ export const runAction = async () => {
     if (!cachedItem) {
       logger.info(`Populating empty cache with fetched feed item...`);
       await cache.set(feedItem);
+    } else {
+      logger.info('No new feed item detected. Exiting...');
     }
 
     const finalObject = convertArrayToObject(skippedStatuses);
 
-    setOutput('updateStatus', JSON.stringify(finalObject));
+    setOutput(ActionOutput.updateStatus, JSON.stringify(finalObject));
+
+    return;
   } catch (error) {
     if (error instanceof Error) setFailed(error.message);
+    return;
   }
 };

@@ -1,89 +1,89 @@
-name: "Feed To Social Media Composite"
-description: "Post to social media whenever new item is found in a RSS/Atom feed"
-author: "Łukasz Wójcik"
+name: 'Feed To Social Media Composite'
+description: 'Post to social media whenever new item is found in a RSS/Atom feed'
+author: 'Łukasz Wójcik'
 
 branding:
-  icon: "rss"
-  color: "orange"
+  icon: 'rss'
+  color: 'orange'
 
 inputs:
   # General settings
   feedUrl:
-    description: "URL of the feed to fetch"
+    description: 'URL of the feed to fetch'
     required: true
   newestItemStrategy:
-    description: "Which item in the feed item array should be considered newest?"
+    description: 'Which item in the feed item array should be considered newest?'
     required: true
-    default: "latestDate"
+    default: 'latestDate'
   cacheDirectory:
-    description: "Path to the directory where cache files are stored"
-    default: "cache"
+    description: 'Path to the directory where cache files are stored'
+    default: 'cache'
   cacheFileName:
-    description: "Name of the file where cache data is stored"
-    default: "feed-to-social-media.json"
+    description: 'Name of the file where cache data is stored'
+    default: 'feed-to-social-media.json'
   postFormat:
-    description: "Format of the post. Available tags: {title} - post title, {link} - post URL"
-    default: "{title} {link}"
+    description: 'Format of the post. Available tags: {title} - post title, {link} - post URL'
+    default: '{title} {link}'
   # Mastodon settings
   mastodonEnable:
-    description: "Enable posting to Mastodon?"
-    default: "false"
+    description: 'Enable posting to Mastodon?'
+    default: 'false'
   mastodonInstance:
-    description: "URL of the Mastodon instance to which the status should be sent"
+    description: 'URL of the Mastodon instance to which the status should be sent'
   mastodonAccessToken:
-    description: "Access token for the Mastodon API"
+    description: 'Access token for the Mastodon API'
   mastodonPostVisibility:
-    description: "Visibility setting for Mastodon posts"
-    default: "public"
+    description: 'Visibility setting for Mastodon posts'
+    default: 'public'
   # Mastodon profile metadata settings
   mastodonMetadataEnable:
-    description: "Enable updating Mastodon profile metadata?"
-    default: "false"
+    description: 'Enable updating Mastodon profile metadata?'
+    default: 'false'
   mastodonMetadataInstance:
-    description: "URL of the Mastodon instance where profile metadata should be updated"
+    description: 'URL of the Mastodon instance where profile metadata should be updated'
   mastodonMetadataAccessToken:
-    description: "Access token for the Mastodon API on the instance where profile metadata should be updated"
+    description: 'Access token for the Mastodon API on the instance where profile metadata should be updated'
   mastodonMetadataFieldIndex:
-    description: "Index of the existing profile metadata field that should be updated (starting at 0)"
+    description: 'Index of the existing profile metadata field that should be updated (starting at 0)'
     required: true
   # Twitter settings
   twitterEnable:
-    description: "Enable posting to Twitter?"
-    default: "false"
+    description: 'Enable posting to Twitter?'
+    default: 'false'
   twitterApiKey:
-    description: "Twitter API key"
+    description: 'Twitter API key'
   twitterApiKeySecret:
-    description: "Twitter API key secret"
+    description: 'Twitter API key secret'
   twitterAccessToken:
-    description: "Twitter API access token"
+    description: 'Twitter API access token'
   twitterAccessTokenSecret:
-    description: "Twitter API access token secret"
+    description: 'Twitter API access token secret'
   # Discord settings
   discordEnable:
-    description: "Enable posting to Discord?"
-    default: "false"
+    description: 'Enable posting to Discord?'
+    default: 'false'
   discordWebhookUrl:
-    description: "Webhook URL to use for posting messages to Discord"
+    description: 'Webhook URL to use for posting messages to Discord'
   # Slack settings
   slackEnable:
-    description: "Enable posting to Slack?"
-    default: "false"
+    description: 'Enable posting to Slack?'
+    default: 'false'
   slackWebhookUrl:
-    description: "Webhook URL to use for posting messages to Slack"
+    description: 'Webhook URL to use for posting messages to Slack'
 
 outputs:
   updateStatus:
-    description: "Stringified object with update status"
+    description: 'Stringified object with update status'
     value: ${{ steps.feed2sm.outputs.updateStatus }}
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Checkout repo
       uses: actions/checkout@v3
     - name: Feed to social media
       id: feed2sm
-      uses: ./.github/actions/core
+      uses: ./dist
       with:
         feedUrl: ${{ inputs.feedUrl }}
         newestItemStrategy: ${{ inputs.newestItemStrategy }}

@@ -83,7 +83,7 @@ runs:
       uses: actions/checkout@v3
     - name: Feed to social media
       id: feed2sm
-      uses: ./dist
+      uses: ./
       with:
         feedUrl: ${{ inputs.feedUrl }}
         newestItemStrategy: ${{ inputs.newestItemStrategy }}

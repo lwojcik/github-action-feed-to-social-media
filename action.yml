@@ -1,9 +1,11 @@
 name: 'Feed To Social Media'
 description: 'Post to social media whenever new item is found in a RSS/Atom feed'
 author: 'Łukasz Wójcik'
+
 branding:
   icon: 'rss'
   color: 'orange'
+
 inputs:
   # General settings
   feedUrl:
@@ -68,9 +70,48 @@ inputs:
     default: 'false'
   slackWebhookUrl:
     description: 'Webhook URL to use for posting messages to Slack'
+
 outputs:
   updateStatus:
     description: 'Stringified object with update status'
+    value: ${{ steps.feed2sm.outputs.updateStatus }}
+
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
+  using: 'composite'
+  steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Feed to social media
+      run: node ${{ github.action_path }}/dist/index.js
+      shell: bash
+      env:
+        INPUT_FEEDURL: ${{ inputs.feedUrl }}
+        INPUT_NEWESTITEMSTRATEGY: ${{ inputs.newestItemStrategy }}
+        INPUT_CACHEDIRECTORY: ${{ inputs.cacheDirectory }}
+        INPUT_CACHEFILENAME: ${{ inputs.cacheFileName }}
+        INPUT_POSTFORMAT: ${{ inputs.postFormat }}
+        INPUT_MASTODONENABLE: ${{ inputs.mastodonEnable }}
+        INPUT_MASTODONINSTANCE: ${{ inputs.mastodonInstance }}
+        INPUT_MASTODONACCESSTOKEN: ${{ inputs.mastodonAccessToken }}
+        INPUT_MASTODONPOSTVISIBILITY: ${{ inputs.mastodonPostVisibility }}
+        INPUT_MASTODONMETADATAENABLE: ${{ inputs.mastodonMetadataEnable }}
+        INPUT_MASTODONMETADATAINSTANCE: ${{ inputs.mastodonMetadataInstance }}
+        INPUT_MASTODONMETADATAACCESSTOKEN: ${{ inputs.mastodonMetadataAccessToken }}
+        INPUT_MASTODONMETADATAFIELDINDEX: ${{ inputs.mastodonMetadataFieldIndex }}
+        INPUT_TWITTERENABLE: ${{ inputs.twitterEnable }}
+        INPUT_TWITTERAPIKEY: ${{ inputs.twitterApiKey }}
+        INPUT_TWITTERAPIKEYSECRET: ${{ inputs.twitterApiKeySecret }}
+        INPUT_TWITTERACCESSTOKEN: ${{ inputs.twitterAccessToken }}
+        INPUT_TWITTERACCESSTOKENSECRET: ${{ inputs.twitterAccessTokenSecret }}
+        INPUT_DISCORDENABLE: ${{ inputs.discordEnable }}
+        INPUT_DISCORDWEBHOOKURL: ${{ inputs.discordWebhookUrl }}
+        INPUT_SLACKENABLE: ${{ inputs.slackEnable }}
+        INPUT_SLACKWEBHOOKURL: ${{ inputs.slackWebhookUrl }}
+
+    - name: Pull any changes from Git
+      shell: bash
+      run: git pull
+
+    - name: Commit and push cache changes
+      uses: stefanzweifel/git-auto-commit-action@v4

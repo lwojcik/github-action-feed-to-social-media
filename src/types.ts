@@ -36,6 +36,10 @@ export enum ActionInput {
   slackWebhookUrl = 'slackWebhookUrl',
 }
 
+export enum ActionOutput {
+  updateStatus = 'updateStatus',
+}
+
 export enum SocialService {
   mastodon = 'mastodon',
   mastodonMetadata = 'mastodonMetadata',

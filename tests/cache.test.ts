@@ -36,12 +36,12 @@ describe('Cache', () => {
   describe('get', () => {
     it('should create cache file when it does not exist', async () => {
       const CACHE_FILE = 'test-file.json';
-      const TEST_CONTENT = 'expected test content';
+      const TEST_CONTENT = { test: 'expected test content' };
 
       const existsSyncFn = jest.spyOn(fs, 'existsSync');
       existsSyncFn.mockReturnValue(false);
 
-      await new Cache<string>(CACHE_FILE).set(TEST_CONTENT);
+      await new Cache(CACHE_FILE).set(TEST_CONTENT);
 
       expect(mkdirP).toHaveBeenCalled();
     });
@@ -67,7 +67,7 @@ describe('Cache', () => {
 
     it('should return undefined when no content is cached', () => {
       const fileName = 'test-file.json';
-      const testCache = new Cache<string>(fileName);
+      const testCache = new Cache(fileName);
 
       const result = testCache.get();
 
@@ -79,7 +79,7 @@ describe('Cache', () => {
 describe('createCache', () => {
   it('should create a new Cache instance with the provided name', () => {
     const fileName = 'test-file.json';
-    const cache = createCache<string>(fileName);
+    const cache = createCache(fileName);
 
     expect(cache).toBeInstanceOf(Cache);
     expect(cache.name).toBe(fileName);

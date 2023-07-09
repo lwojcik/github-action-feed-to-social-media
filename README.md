@@ -30,13 +30,8 @@ jobs:
   Feed2SocialMedia:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the repository to restore previous cache
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      # Post to social media
       - name: Feed to social media
-        uses: lwojcik/github-action-feed-to-social-media@v1
+        uses: lwojcik/github-action-feed-to-social-media@v2
         with:
           feedUrl: 'https://offbeatbits.com/excerpts.xml'
           newestItemStrategy: 'latestDate'
@@ -63,25 +58,17 @@ jobs:
           # Slack settings
           slackEnable: true
           slackWebhookUrl: 'DISCORD_WEBHOOK_URL'
-
-      # Make sure files are up to date if other commits have been pushed in the mean time
-      - name: Pull any changes from Git
-        run: git pull
-
-      # Push cache changes to the repository
-      - name: Commit and push
-        uses: stefanzweifel/git-auto-commit-action@v4
 ```
 
-Note that we use `actions/checkout@v3` and `stefanzweifel/git-auto-commit-action@v4` to restore and update feed cache. That way the Action won't post the same thing twice.
+Internally, the Action uses [actions/checkout](https://github.com/actions/checkout/) and [stefanzweifel/git-auto-commit-action](stefanzweifel/git-auto-commit-action) to restore and update the feed cache. This allows the Action to remember which item was previously posted and prevents duplicate postings.
 
-The action won't post anything if cache is empty (i.e. on first run or when you delete cache from the directory).
+The Action won't post anything if cache is empty (i.e. on first run or when you delete cache from the directory).
 
 To store sensitive information (e.g. access tokens) use [Encrypted Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) so that you can keep your action workflow public in a safe way:
 
 ```yaml
  - name: Feed to social media
-    uses: lwojcik/github-action-feed-to-social-media@v1
+    uses: lwojcik/github-action-feed-to-social-media@v2
     with:
       feedUrl: 'https://example.org/your-feed-url.xml'
       # Mastodon settings

@@ -4,7 +4,7 @@ import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { config } from './config';
 import { logger } from './logger';
 
-export class Cache<T = Record<string, unknown>> {
+export class Cache {
   name: string;
   private cacheDir: string;
   private cacheFilePath: string;
@@ -42,13 +42,13 @@ export class Cache<T = Record<string, unknown>> {
     });
   }
 
-  get() {
+  get<T = unknown>() {
     if (this.cacheExists()) {
       logger.info(`Reading cache: ${this.name}`);
 
       const content = this.readCache();
 
-      logger.debug(`Retrieved cached item title: ${content}`);
+      logger.debug(`Retrieved cached item title: ${JSON.stringify(content)}`);
 
       return JSON.parse(content) as T;
     }
@@ -56,7 +56,7 @@ export class Cache<T = Record<string, unknown>> {
     return undefined;
   }
 
-  async set(content: T) {
+  async set(content: Record<string, unknown>) {
     if (!this.cacheDirExists()) {
       logger.info(`Cache directory doesn't exist. Creating...`);
       await this.createCacheDir();
@@ -68,4 +68,4 @@ export class Cache<T = Record<string, unknown>> {
   }
 }
 
-export const createCache = <T>(fileName: string) => new Cache<T>(fileName);
+export const createCache = (fileName: string) => new Cache(fileName);

@@ -82,31 +82,6 @@ runs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
-    # - name: Set environment variables
-    #   shell: bash
-    #   run: |
-    #     echo "INPUT_FEEDURL=${{ inputs.feedUrl }}" >> $GITHUB_ENV
-    #     echo "INPUT_NEWESTITEMSTRATEGY=${{ inputs.newestItemStrategy }}" >> $GITHUB_ENV
-    #     echo "INPUT_CACHEDIRECTORY=${{ inputs.cacheDirectory }}" >> $GITHUB_ENV
-    #     echo "INPUT_CACHEFILENAME=${{ inputs.cacheFileName }}" >> $GITHUB_ENV
-    #     echo "INPUT_POSTFORMAT=${{ inputs.postFormat }}" >> $GITHUB_ENV
-    #     echo "INPUT_MASTODONENABLE=${{ inputs.mastodonEnable }}" >> $GITHUB_ENV
-    #     echo "INPUT_MASTODONINSTANCE=${{ inputs.mastodonInstance }}" >> $GITHUB_ENV
-    #     echo "INPUT_MASTODONACCESSTOKEN=${{ inputs.mastodonAccessToken }}" >> $GITHUB_ENV
-    #     echo "INPUT_MASTODONPOSTVISIBILITY=${{ inputs.mastodonPostVisibility }}" >> $GITHUB_ENV
-    #     echo "INPUT_MASTODONMETADATAENABLE=${{ inputs.mastodonMetadataEnable }}" >> $GITHUB_ENV
-    #     echo "INPUT_MASTODONMETADATAINSTANCE=${{ inputs.mastodonMetadataInstance }}" >> $GITHUB_ENV
-    #     echo "INPUT_MASTODONMETADATAACCESSTOKEN=${{ inputs.mastodonMetadataAccessToken }}" >> $GITHUB_ENV
-    #     echo "INPUT_MASTODONMETADATAFIELDINDEX=${{ inputs.mastodonMetadataFieldIndex }}" >> $GITHUB_ENV
-    #     echo "INPUT_TWITTERENABLE=${{ inputs.twitterEnable }}" >> $GITHUB_ENV
-    #     echo "INPUT_TWITTERAPIKEY=${{ inputs.twitterApiKey }}" >> $GITHUB_ENV
-    #     echo "INPUT_TWITTERAPIKEYSECRET=${{ inputs.twitterApiKeySecret }}" >> $GITHUB_ENV
-    #     echo "INPUT_TWITTERACCESSTOKEN=${{ inputs.twitterAccessToken }}" >> $GITHUB_ENV
-    #     echo "INPUT_TWITTERACCESSTOKENSECRET=${{ inputs.twitterAccessTokenSecret }}" >> $GITHUB_ENV
-    #     echo "INPUT_DISCORDENABLE=${{ inputs.discordEnable }}" >> $GITHUB_ENV
-    #     echo "INPUT_DISCORDWEBHOOKURL=${{ inputs.discordWebhookUrl }}" >> $GITHUB_ENV
-    #     echo "INPUT_SLACKENABLE=${{ inputs.slackEnable }}" >> $GITHUB_ENV
-    #     echo "INPUT_SLACKWEBHOOKURL=${{ inputs.slackWebhookUrl }}" >> $GITHUB_ENV
     - name: Feed to social media
       run: node ${{ github.action_path }}/dist/index.js
       shell: bash
@@ -132,52 +107,11 @@ runs:
         INPUT_DISCORDENABLE: ${{ inputs.discordEnable }}
         INPUT_DISCORDWEBHOOKURL: ${{ inputs.discordWebhookUrl }}
         INPUT_SLACKENABLE: ${{ inputs.slackEnable }}
-        INPUT_SLACKWEBHOOKURL: ${{ inputs.slackWebhookUrl }} # with:
-      #   feedUrl: ${{ inputs.feedUrl }}
-      #   newestItemStrategy: ${{ inputs.newestItemStrategy }}
-      #   postFormat: ${{ inputs.postFormat }}
-      #   mastodonEnable: ${{ inputs.mastodonEnable }}
-      #   mastodonInstance: ${{ inputs.mastodonInstance }}
-      #   mastodonAccessToken: ${{ inputs.mastodonAccessToken }}
-      #   mastodonPostVisibility: ${{ inputs.mastodonPostVisibility }}
-      #   mastodonMetadataEnable: ${{ inputs.mastodonMetadataEnable }}
-      #   mastodonMetadataInstance: ${{ inputs.mastodonMetadataInstance }}
-      #   mastodonMetadataAccessToken: ${{ inputs.mastodonMetadataAccessToken }}
-      #   mastodonMetadataFieldIndex: ${{ inputs.mastodonMetadataFieldIndex }}
-      #   twitterEnable: ${{ inputs.twitterEnable }}
-      #   twitterApiKey: ${{ inputs.twitterApiKey }}
-      #   twitterApiKeySecret: ${{ inputs.twitterApiKeySecret }}
-      #   twitterAccessToken: ${{ inputs.twitterAccessToken }}
-      #   twitterAccessTokenSecret: ${{ inputs.twitterAccessTokenSecret }}
-      #   discordEnable: ${{ inputs.discordEnable }}
-      #   discordWebhookUrl: ${{ inputs.discordWebhookUrl }}
-      #   slackEnable: ${{ inputs.slackEnable }}
-      #   slackWebhookUrl: ${{ inputs.slackWebhookUrl }}
+        INPUT_SLACKWEBHOOKURL: ${{ inputs.slackWebhookUrl }}
 
-    # - name: Feed to social media
-    #   id: feed2sm
-    #   uses: ./.github/actions/core
-    #   with:
-    #     feedUrl: ${{ inputs.feedUrl }}
-    #     newestItemStrategy: ${{ inputs.newestItemStrategy }}
-    #     postFormat: ${{ inputs.postFormat }}
-    #     mastodonEnable: ${{ inputs.mastodonEnable }}
-    #     mastodonInstance: ${{ inputs.mastodonInstance }}
-    #     mastodonAccessToken: ${{ inputs.mastodonAccessToken }}
-    #     mastodonPostVisibility: ${{ inputs.mastodonPostVisibility }}
-    #     mastodonMetadataEnable: ${{ inputs.mastodonMetadataEnable }}
-    #     mastodonMetadataInstance: ${{ inputs.mastodonMetadataInstance }}
-    #     mastodonMetadataAccessToken: ${{ inputs.mastodonMetadataAccessToken }}
-    #     mastodonMetadataFieldIndex: ${{ inputs.mastodonMetadataFieldIndex }}
-    #     twitterEnable: ${{ inputs.twitterEnable }}
-    #     twitterApiKey: ${{ inputs.twitterApiKey }}
-    #     twitterApiKeySecret: ${{ inputs.twitterApiKeySecret }}
-    #     twitterAccessToken: ${{ inputs.twitterAccessToken }}
-    #     twitterAccessTokenSecret: ${{ inputs.twitterAccessTokenSecret }}
-    #     discordEnable: ${{ inputs.discordEnable }}
-    #     discordWebhookUrl: ${{ inputs.discordWebhookUrl }}
-    #     slackEnable: ${{ inputs.slackEnable }}
-    #     slackWebhookUrl: ${{ inputs.slackWebhookUrl }}
+    - name: Pull any changes from Git
+      shell: bash
+      run: git pull
 
     - name: Commit and push cache changes
       uses: stefanzweifel/git-auto-commit-action@v4

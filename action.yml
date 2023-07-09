@@ -85,6 +85,27 @@ runs:
     - name: Feed to social media
       run: node ${{ github.action_path }}/dist/index.js
       shell: bash
+      with:
+        feedUrl: ${{ inputs.feedUrl }}
+        newestItemStrategy: ${{ inputs.newestItemStrategy }}
+        postFormat: ${{ inputs.postFormat }}
+        mastodonEnable: ${{ inputs.mastodonEnable }}
+        mastodonInstance: ${{ inputs.mastodonInstance }}
+        mastodonAccessToken: ${{ inputs.mastodonAccessToken }}
+        mastodonPostVisibility: ${{ inputs.mastodonPostVisibility }}
+        mastodonMetadataEnable: ${{ inputs.mastodonMetadataEnable }}
+        mastodonMetadataInstance: ${{ inputs.mastodonMetadataInstance }}
+        mastodonMetadataAccessToken: ${{ inputs.mastodonMetadataAccessToken }}
+        mastodonMetadataFieldIndex: ${{ inputs.mastodonMetadataFieldIndex }}
+        twitterEnable: ${{ inputs.twitterEnable }}
+        twitterApiKey: ${{ inputs.twitterApiKey }}
+        twitterApiKeySecret: ${{ inputs.twitterApiKeySecret }}
+        twitterAccessToken: ${{ inputs.twitterAccessToken }}
+        twitterAccessTokenSecret: ${{ inputs.twitterAccessTokenSecret }}
+        discordEnable: ${{ inputs.discordEnable }}
+        discordWebhookUrl: ${{ inputs.discordWebhookUrl }}
+        slackEnable: ${{ inputs.slackEnable }}
+        slackWebhookUrl: ${{ inputs.slackWebhookUrl }}
 
     # - name: Feed to social media
     #   id: feed2sm

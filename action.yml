@@ -79,33 +79,82 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: Feed to social media
+    - name: Checkout repo
       uses: actions/checkout@v3
+
+    - name: Set environment variables
+      shell: bash
+      run: |
+        echo "INPUT_FEEDURL=${{ inputs.feedUrl }}" >> $GITHUB_ENV
+        echo "INPUT_NEWESTITEMSTRATEGY=${{ inputs.newestItemStrategy }}" >> $GITHUB_ENV
+        echo "INPUT_CACHEDIRECTORY=${{ inputs.cacheDirectory }}" >> $GITHUB_ENV
+        echo "INPUT_CACHEFILENAME=${{ inputs.cacheFileName }}" >> $GITHUB_ENV
+        echo "INPUT_POSTFORMAT=${{ inputs.postFormat }}" >> $GITHUB_ENV
+        echo "INPUT_MASTODONENABLE=${{ inputs.mastodonEnable }}" >> $GITHUB_ENV
+        echo "INPUT_MASTODONINSTANCE=${{ inputs.mastodonInstance }}" >> $GITHUB_ENV
+        echo "INPUT_MASTODONACCESSTOKEN=${{ inputs.mastodonAccessToken }}" >> $GITHUB_ENV
+        echo "INPUT_MASTODONPOSTVISIBILITY=${{ inputs.mastodonPostVisibility }}" >> $GITHUB_ENV
+        echo "INPUT_MASTODONMETADATAENABLE=${{ inputs.mastodonMetadataEnable }}" >> $GITHUB_ENV
+        echo "INPUT_MASTODONMETADATAINSTANCE=${{ inputs.mastodonMetadataInstance }}" >> $GITHUB_ENV
+        echo "INPUT_MASTODONMETADATAACCESSTOKEN=${{ inputs.mastodonMetadataAccessToken }}" >> $GITHUB_ENV
+        echo "INPUT_MASTODONMETADATAFIELDINDEX=${{ inputs.mastodonMetadataFieldIndex }}" >> $GITHUB_ENV
+        echo "INPUT_TWITTERENABLE=${{ inputs.twitterEnable }}" >> $GITHUB_ENV
+        echo "INPUT_TWITTERAPIKEY=${{ inputs.twitterApiKey }}" >> $GITHUB_ENV
+        echo "INPUT_TWITTERAPIKEYSECRET=${{ inputs.twitterApiKeySecret }}" >> $GITHUB_ENV
+        echo "INPUT_TWITTERACCESSTOKEN=${{ inputs.twitterAccessToken }}" >> $GITHUB_ENV
+        echo "INPUT_TWITTERACCESSTOKENSECRET=${{ inputs.twitterAccessTokenSecret }}" >> $GITHUB_ENV
+        echo "INPUT_DISCORDENABLE=${{ inputs.discordEnable }}" >> $GITHUB_ENV
+        echo "INPUT_DISCORDWEBHOOKURL=${{ inputs.discordWebhookUrl }}" >> $GITHUB_ENV
+        echo "INPUT_SLACKENABLE=${{ inputs.slackEnable }}" >> $GITHUB_ENV
+        echo "INPUT_SLACKWEBHOOKURL=${{ inputs.slackWebhookUrl }}" >> $GITHUB_ENV
 
     - name: Feed to social media
       run: node ${{ github.action_path }}/dist/index.js
       shell: bash
-      with:
-        feedUrl: ${{ inputs.feedUrl }}
-        newestItemStrategy: ${{ inputs.newestItemStrategy }}
-        postFormat: ${{ inputs.postFormat }}
-        mastodonEnable: ${{ inputs.mastodonEnable }}
-        mastodonInstance: ${{ inputs.mastodonInstance }}
-        mastodonAccessToken: ${{ inputs.mastodonAccessToken }}
-        mastodonPostVisibility: ${{ inputs.mastodonPostVisibility }}
-        mastodonMetadataEnable: ${{ inputs.mastodonMetadataEnable }}
-        mastodonMetadataInstance: ${{ inputs.mastodonMetadataInstance }}
-        mastodonMetadataAccessToken: ${{ inputs.mastodonMetadataAccessToken }}
-        mastodonMetadataFieldIndex: ${{ inputs.mastodonMetadataFieldIndex }}
-        twitterEnable: ${{ inputs.twitterEnable }}
-        twitterApiKey: ${{ inputs.twitterApiKey }}
-        twitterApiKeySecret: ${{ inputs.twitterApiKeySecret }}
-        twitterAccessToken: ${{ inputs.twitterAccessToken }}
-        twitterAccessTokenSecret: ${{ inputs.twitterAccessTokenSecret }}
-        discordEnable: ${{ inputs.discordEnable }}
-        discordWebhookUrl: ${{ inputs.discordWebhookUrl }}
-        slackEnable: ${{ inputs.slackEnable }}
-        slackWebhookUrl: ${{ inputs.slackWebhookUrl }}
+      env:
+        INPUT_FEEDURL: ${{ env.INPUT_FEEDURL }}
+        INPUT_NEWESTITEMSTRATEGY: ${{ env.INPUT_NEWESTITEMSTRATEGY }}
+        INPUT_CACHEDIRECTORY: ${{ env.INPUT_CACHEDIRECTORY }}
+        INPUT_CACHEFILENAME: ${{ env.INPUT_CACHEFILENAME }}
+        INPUT_POSTFORMAT: ${{ env.INPUT_POSTFORMAT }}
+        INPUT_MASTODONENABLE: ${{ env.INPUT_MASTODONENABLE }}
+        INPUT_MASTODONINSTANCE: ${{ env.INPUT_MASTODONINSTANCE }}
+        INPUT_MASTODONACCESSTOKEN: ${{ env.INPUT_MASTODONACCESSTOKEN }}
+        INPUT_MASTODONPOSTVISIBILITY: ${{ env.INPUT_MASTODONPOSTVISIBILITY }}
+        INPUT_MASTODONMETADATAENABLE: ${{ env.INPUT_MASTODONMETADATAENABLE }}
+        INPUT_MASTODONMETADATAINSTANCE: ${{ env.INPUT_MASTODONMETADATAINSTANCE }}
+        INPUT_MASTODONMETADATAACCESSTOKEN: ${{ env.INPUT_MASTODONMETADATAACCESSTOKEN }}
+        INPUT_MASTODONMETADATAFIELDINDEX: ${{ env.INPUT_MASTODONMETADATAFIELDINDEX }}
+        INPUT_TWITTERENABLE: ${{ env.INPUT_TWITTERENABLE }}
+        INPUT_TWITTERAPIKEY: ${{ env.INPUT_TWITTERAPIKEY }}
+        INPUT_TWITTERAPIKEYSECRET: ${{ env.INPUT_TWITTERAPIKEYSECRET }}
+        INPUT_TWITTERACCESSTOKEN: ${{ env.INPUT_TWITTERACCESSTOKEN }}
+        INPUT_TWITTERACCESSTOKENSECRET: ${{ env.INPUT_TWITTERACCESSTOKENSECRET }}
+        INPUT_DISCORDENABLE: ${{ env.INPUT_DISCORDENABLE }}
+        INPUT_DISCORDWEBHOOKURL: ${{ env.INPUT_DISCORDWEBHOOKURL }}
+        INPUT_SLACKENABLE: ${{ env.INPUT_SLACKENABLE }}
+        INPUT_SLACKWEBHOOKURL: ${{ env.INPUT_SLACKWEBHOOKURL }}
+      # with:
+      #   feedUrl: ${{ inputs.feedUrl }}
+      #   newestItemStrategy: ${{ inputs.newestItemStrategy }}
+      #   postFormat: ${{ inputs.postFormat }}
+      #   mastodonEnable: ${{ inputs.mastodonEnable }}
+      #   mastodonInstance: ${{ inputs.mastodonInstance }}
+      #   mastodonAccessToken: ${{ inputs.mastodonAccessToken }}
+      #   mastodonPostVisibility: ${{ inputs.mastodonPostVisibility }}
+      #   mastodonMetadataEnable: ${{ inputs.mastodonMetadataEnable }}
+      #   mastodonMetadataInstance: ${{ inputs.mastodonMetadataInstance }}
+      #   mastodonMetadataAccessToken: ${{ inputs.mastodonMetadataAccessToken }}
+      #   mastodonMetadataFieldIndex: ${{ inputs.mastodonMetadataFieldIndex }}
+      #   twitterEnable: ${{ inputs.twitterEnable }}
+      #   twitterApiKey: ${{ inputs.twitterApiKey }}
+      #   twitterApiKeySecret: ${{ inputs.twitterApiKeySecret }}
+      #   twitterAccessToken: ${{ inputs.twitterAccessToken }}
+      #   twitterAccessTokenSecret: ${{ inputs.twitterAccessTokenSecret }}
+      #   discordEnable: ${{ inputs.discordEnable }}
+      #   discordWebhookUrl: ${{ inputs.discordWebhookUrl }}
+      #   slackEnable: ${{ inputs.slackEnable }}
+      #   slackWebhookUrl: ${{ inputs.slackWebhookUrl }}
 
     # - name: Feed to social media
     #   id: feed2sm

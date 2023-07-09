@@ -48,7 +48,7 @@ export const runAction = async () => {
 
     if (cachedItem) {
       logger.debug('Cached item:');
-      logger.debug(JSON.stringify(cachedItem as FeedItem));
+      logger.debug(JSON.stringify(cachedItem));
     } else {
       logger.debug('No cached item found!');
     }

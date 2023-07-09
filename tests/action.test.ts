@@ -71,6 +71,20 @@ describe('runAction', () => {
     expect(mockedSetOutput).toHaveBeenCalled();
   });
 
+  it('should exit when no new feed item is detected', async () => {
+    const mockedSetOutput = setOutput as jest.Mock;
+
+    const mockedFeedItem = { title: 'New Feed Item' };
+
+    (fetchLatestFeedItem as any).mockResolvedValueOnce(mockedFeedItem);
+    (createCache as any).mockReturnValueOnce({
+      get: jest.fn().mockReturnValue(mockedFeedItem),
+      set: jest.fn(),
+    });
+
+    await runAction();
+  });
+
   it('should handle error and set failed status', async () => {
     const mockedSetFailed = setFailed as jest.Mock;
 

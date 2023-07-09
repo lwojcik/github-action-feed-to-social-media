@@ -113,5 +113,25 @@ runs:
       shell: bash
       run: git pull
 
+    - name: Configure Git
+      shell: bash
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "<>"
+
+    - name: Check for changes
+      shell: bash
+      id: git_changes
+      run: |
+        git diff --quiet || echo "::set-output name=changes::true"
+
     - name: Commit and push cache changes
-      uses: stefanzweifel/git-auto-commit-action@v4
+      shell: bash
+      if: steps.git_changes.outputs.changes == 'true'
+      run: |
+        git add .
+        git commit -m "Update cache files"
+        git push
+
+    # - name: Commit and push cache changes
+    #   uses: stefanzweifel/git-auto-commit-action@v4

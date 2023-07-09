@@ -1,10 +1,6 @@
 import { FeedEntry } from '@extractus/feed-extractor';
 
 export enum ActionInput {
-  // Git
-  ghToken = 'ghToken',
-  gitUsername = 'gitUsername',
-  gitEmail = 'gitEmail',
   // General
   feedUrl = 'feedUrl',
   newestItemStrategy = 'newestItemStrategy',

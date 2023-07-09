@@ -1,4 +1,4 @@
-name: 'Feed To Social Media Composite'
+name: 'Feed To Social Media'
 description: 'Post to social media whenever new item is found in a RSS/Atom feed'
 author: 'Łukasz Wójcik'
 

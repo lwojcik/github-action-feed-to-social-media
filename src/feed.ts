@@ -1,4 +1,4 @@
-import { FeedEntry, extract } from '@extractus/feed-extractor';
+import { FeedEntry, extract, ReaderOptions } from '@extractus/feed-extractor';
 import { FeedItem, NewestItemStrategy } from './types';
 import { logger } from './logger';
 
@@ -19,7 +19,18 @@ export class Feed {
 
   private async extract() {
     logger.debug(`Extracting feed: ${this.url}`);
-    this.items = (await extract(this.url)).entries;
+
+    const parserOptions = {
+      descriptionMaxLen: 999999,
+      xmlParserOptions: {
+        ignoreAttributes: false,
+        attributeNamePrefix: '',
+        allowBooleanAttributes: true,
+      },
+      getExtraEntryFields: (feedEntry: unknown) => feedEntry,
+    } as ReaderOptions;
+
+    this.items = (await extract(this.url, parserOptions)).entries;
     return this.items;
   }
 

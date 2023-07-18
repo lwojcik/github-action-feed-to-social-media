@@ -1,5 +1,4 @@
-import { FeedItem, PostSubmitStatus, SocialService } from '../types';
-import { logger } from './logger';
+import { FeedItem, SocialService } from '../types';
 import { updateMastodonMetadata } from '../services/mastodon-metadata';
 import { postToDiscord } from '../services/discord';
 import { postToSlack } from '../services/slack';
@@ -13,34 +12,22 @@ export const postToSocialMedia = (params: {
   content: FeedItem;
 }) => {
   const { content, type } = params;
-  const { title, link } = params.content;
+  const { link } = params.content;
   const { POST_FORMAT } = config;
 
-  console.log(POST_FORMAT);
-
-  if (!title && !link) {
-    logger.notice('Both post title and link are empty. Skipping...');
-    return Promise.resolve(PostSubmitStatus.skipped);
-  }
-
-  const postContent = formatPostContent(
-    content,
-    POST_FORMAT
-  ) as unknown as string;
-
-  console.log(postContent);
+  const formattedPost = formatPostContent(content, POST_FORMAT);
 
   switch (type) {
     case SocialService.mastodon:
-      return postToMastodon(postContent);
+      return postToMastodon(formattedPost);
     case SocialService.mastodonMetadata:
       return updateMastodonMetadata(link || '');
     case SocialService.twitter:
-      return postToTwitter(postContent);
+      return postToTwitter(formattedPost);
     case SocialService.discord:
-      return postToDiscord(postContent);
+      return postToDiscord(formattedPost);
     case SocialService.slack:
-      return postToSlack(postContent);
+      return postToSlack(formattedPost);
     default:
       throw new Error(
         `Unknown social media type: '${type}'. Available types: ${Object.keys(

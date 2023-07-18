@@ -28,19 +28,19 @@ export const runAction = async () => {
 
     logger.debug(JSON.stringify(feedItem));
 
-    // if (!feedItem) {
-    //   logger.warning('No feed item to fetch!');
+    if (!feedItem) {
+      logger.warning('No feed item to fetch!');
 
-    //   const skippedStatuses = servicesToUpdate.map((service) => ({
-    //     [service]: PostSubmitStatus.skipped,
-    //   }));
+      const skippedStatuses = servicesToUpdate.map((service) => ({
+        [service]: PostSubmitStatus.skipped,
+      }));
 
-    //   const outputObject = convertArrayToObject(skippedStatuses);
+      const outputObject = convertArrayToObject(skippedStatuses);
 
-    //   setOutput(ActionOutput.updateStatus, JSON.stringify(outputObject));
+      setOutput(ActionOutput.updateStatus, JSON.stringify(outputObject));
 
-    //   return;
-    // }
+      return;
+    }
 
     const cache = createCache(CACHE_FILE_NAME);
 
@@ -53,10 +53,7 @@ export const runAction = async () => {
       logger.debug('No cached item found!');
     }
 
-    // const shouldPost = isFeedItemNewer({ feedItem, cachedItem });
-    const shouldPost = true;
-
-    console.log(feedItem);
+    const shouldPost = isFeedItemNewer({ feedItem, cachedItem });
 
     if (shouldPost) {
       logger.info('New feed item detected. Attempting to post it...');

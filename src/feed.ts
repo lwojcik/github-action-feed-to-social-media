@@ -1,6 +1,6 @@
-import { FeedEntry, extract, ReaderOptions } from '@extractus/feed-extractor';
+import { extract, ReaderOptions } from '@extractus/feed-extractor';
 import { FeedItem, NewestItemStrategy } from './types';
-import { logger } from './helpers';
+import { logger, getExtraEntryFields } from './helpers';
 
 export class Feed {
   url: string;
@@ -25,35 +25,9 @@ export class Feed {
       xmlParserOptions: {
         ignoreAttributes: false,
         allowBooleanAttributes: true,
+        // attributeNamePrefix is hardcoded to be '@_'
       },
-      getExtraEntryFields: (feedEntry: Record<string, any>) => {
-        return {
-          ...feedEntry,
-          enclosure: feedEntry.enclosure
-            ? {
-                url: feedEntry.enclosure['@_url'] || undefined,
-                type: feedEntry.enclosure['@_type'] || undefined,
-                length: feedEntry.enclosure['@_length'] || undefined,
-              }
-            : undefined,
-          category: feedEntry.category
-            ? {
-                text: feedEntry.category['@_text'] || undefined,
-              }
-            : undefined,
-          'itunes:image': feedEntry['itunes:image']
-            ? {
-                href: feedEntry['itunes:image']['@_href'] || undefined,
-              }
-            : undefined,
-          guid: feedEntry.guid
-            ? {
-                isPermaLink: feedEntry.guid['@_isPermaLink'] === 'true',
-                text: feedEntry.guid['#text'] || undefined,
-              }
-            : undefined,
-        };
-      },
+      getExtraEntryFields,
     } as ReaderOptions;
 
     this.items = (await extract(this.url, parserOptions))

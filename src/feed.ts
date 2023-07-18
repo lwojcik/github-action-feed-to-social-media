@@ -1,6 +1,7 @@
 import { extract, ReaderOptions } from '@extractus/feed-extractor';
 import { FeedItem, NewestItemStrategy } from './types';
-import { logger, getExtraEntryFields } from './helpers';
+import { getExtraEntryFields } from './helpers/getExtraEntryFields';
+import { logger } from './logger';
 
 export class Feed {
   url: string;

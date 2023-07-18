@@ -8,12 +8,10 @@ import {
   PostSubmitStatus,
   SocialService,
 } from './types';
-import {
-  logger,
-  convertArrayToObject,
-  isFeedItemNewer,
-  postToSocialMedia,
-} from './helpers';
+import { convertArrayToObject } from './helpers/convertArrayToObject';
+import { isFeedItemNewer } from './helpers/isFeedItemNewer';
+import { postToSocialMedia } from './helpers/postToSocialMedia';
+import { logger } from './logger';
 
 export const runAction = async () => {
   try {

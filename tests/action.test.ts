@@ -2,7 +2,8 @@ import { runAction } from '../src/action';
 import { setFailed, setOutput } from '@actions/core';
 import { createCache } from '../src/cache';
 import { fetchLatestFeedItem } from '../src/feed';
-import { isFeedItemNewer, postToSocialMedia } from '../src/helpers';
+import { isFeedItemNewer } from '../src/helpers/isFeedItemNewer';
+import { postToSocialMedia } from '../src/helpers/postToSocialMedia';
 import { FeedItem } from '../src/types';
 
 jest.mock('@actions/core');
@@ -10,7 +11,8 @@ jest.mock('../src/config');
 jest.mock('../src/cache');
 jest.mock('../src/feed');
 jest.mock('../src/logger');
-jest.mock('../src/helpers');
+jest.mock('../src/helpers/isFeedItemNewer');
+jest.mock('../src/helpers/postToSocialMedia');
 
 jest.mock('path', () => ({
   join: (name: string) => name,

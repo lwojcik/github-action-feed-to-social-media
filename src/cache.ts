@@ -2,7 +2,7 @@ import path from 'path';
 import { mkdirP } from '@actions/io';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { config } from './config';
-import { logger } from './logger';
+import { logger } from './helpers';
 
 export class Cache {
   name: string;

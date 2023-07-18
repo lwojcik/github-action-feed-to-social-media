@@ -1,12 +1,12 @@
 import { FeedEntry, extract, ReaderOptions } from '@extractus/feed-extractor';
 import { FeedItem, NewestItemStrategy } from './types';
-import { logger } from './logger';
+import { logger } from './helpers';
 
 export class Feed {
   url: string;
   strategy: NewestItemStrategy;
 
-  private items: FeedEntry[] | undefined;
+  private items: FeedItem[] | undefined;
 
   constructor(url: string, strategy = NewestItemStrategy.latestDate) {
     logger.info(`Setting up feed: ${url}`);
@@ -24,13 +24,40 @@ export class Feed {
       descriptionMaxLen: 999999,
       xmlParserOptions: {
         ignoreAttributes: false,
-        attributeNamePrefix: '',
         allowBooleanAttributes: true,
       },
-      getExtraEntryFields: (feedEntry: unknown) => feedEntry,
+      getExtraEntryFields: (feedEntry: Record<string, any>) => {
+        return {
+          ...feedEntry,
+          enclosure: feedEntry.enclosure
+            ? {
+                url: feedEntry.enclosure['@_url'] || undefined,
+                type: feedEntry.enclosure['@_type'] || undefined,
+                length: feedEntry.enclosure['@_length'] || undefined,
+              }
+            : undefined,
+          category: feedEntry.category
+            ? {
+                text: feedEntry.category['@_text'] || undefined,
+              }
+            : undefined,
+          'itunes:image': feedEntry['itunes:image']
+            ? {
+                href: feedEntry['itunes:image']['@_href'] || undefined,
+              }
+            : undefined,
+          guid: feedEntry.guid
+            ? {
+                isPermaLink: feedEntry.guid['@_isPermaLink'] === 'true',
+                text: feedEntry.guid['#text'] || undefined,
+              }
+            : undefined,
+        };
+      },
     } as ReaderOptions;
 
-    this.items = (await extract(this.url, parserOptions)).entries;
+    this.items = (await extract(this.url, parserOptions))
+      .entries as unknown as FeedItem[];
     return this.items;
   }
 

@@ -5,8 +5,7 @@ import {
   PostSubmitStatus,
   SocialService,
 } from '../types';
-import { logger } from '../logger';
-import { stripHTML } from '../helpers';
+import { logger, stripHTML } from '../helpers';
 
 export class MastodonMetadata {
   private readonly instance: string;

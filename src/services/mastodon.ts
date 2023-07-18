@@ -8,7 +8,7 @@ import {
   SocialMediaService,
   SocialService,
 } from '../types';
-import { logger } from '../logger';
+import { logger } from '../helpers';
 
 export class Mastodon implements SocialMediaService {
   private readonly instance: string;

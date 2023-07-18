@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { config } from '../config';
 import { PostSubmitStatus, SocialMediaService, SocialService } from '../types';
-import { logger } from '../logger';
+import { logger } from '../helpers';
 
 export class Discord implements SocialMediaService {
   private readonly webhookUrl: string;

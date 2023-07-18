@@ -57,6 +57,12 @@ export enum NewestItemStrategy {
 export type TimestampInMiliseconds = number;
 
 export type FeedItem = Omit<FeedEntry, 'published'> & {
+  [key: string]: string | number | boolean | Record<string, any>;
+  enclosure: {
+    url: string;
+    length: string;
+    type: string;
+  };
   published: TimestampInMiliseconds;
 };
 

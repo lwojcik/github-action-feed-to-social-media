@@ -6,7 +6,7 @@ import {
   SocialService,
   TwitterSettings,
 } from '../types';
-import { logger } from '../logger';
+import { logger } from '../helpers';
 
 export class Twitter implements SocialMediaService {
   private readonly apiKey: string;

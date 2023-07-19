@@ -1,6 +1,6 @@
 {
   "name": "github-action-feed-to-social-media",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "description": "Post latest RSS / Atom feed item to multiple social platforms (e.g. Mastodon, Twitter, Discord)",
   "main": "dist/index.js",

@@ -48,7 +48,7 @@ describe('getExtraEntryFields', () => {
   });
 
   test('returns expected extra fields when feedEntry has incomplete properties', () => {
-    const feedEntry = {} as unknown as Record<string, any>;
+    const feedEntry = {};
 
     const result = getExtraEntryFields(feedEntry);
     expect(result).toMatchSnapshot();

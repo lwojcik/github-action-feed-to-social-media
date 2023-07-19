@@ -6,6 +6,7 @@ import {
 } from '../types';
 import { removeUndefinedProps } from './removeUndefinedProps';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getExtraEntryFields = (feedEntry: Record<string, any>) => {
   const extraFields: Partial<FeedItem> = {
     [ExtraEntryField.enclosure]: feedEntry[ExtraEntryField.enclosure]

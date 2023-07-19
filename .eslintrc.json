@@ -8,6 +8,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "filenames/match-regex": "off",
     "no-shadow": "off",
     "import/named": "off",
     "i18n-text/no-en": "off",

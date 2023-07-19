@@ -59,7 +59,7 @@ export const runAction = async () => {
       const postStatuses = servicesToUpdate.map(async (service) => ({
         [service]: await postToSocialMedia({
           type: service,
-          content: feedItem as any,
+          content: feedItem,
         }),
       }));
 
@@ -67,7 +67,7 @@ export const runAction = async () => {
       const outputObject = convertArrayToObject(allSocialsUpdates);
 
       logger.info(`Updating cache with new feed item...`);
-      await cache.set(feedItem as any);
+      await cache.set(feedItem);
 
       setOutput(ActionOutput.updateStatus, JSON.stringify(outputObject));
 
@@ -80,7 +80,7 @@ export const runAction = async () => {
 
     if (!cachedItem) {
       logger.info(`Populating empty cache with fetched feed item...`);
-      await cache.set(feedItem as any);
+      await cache.set(feedItem);
     } else {
       logger.info('No new feed item detected. Exiting...');
     }

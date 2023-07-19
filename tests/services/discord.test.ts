@@ -83,7 +83,9 @@ describe('postToDiscord', () => {
     const DiscordMock = jest.fn().mockImplementation(() => discordInstance);
     jest.mock('../../src/services/discord', () => ({ Discord: DiscordMock }));
 
-    config.SOCIAL_MEDIA[SocialService.discord] = { webhookUrl: 'webhook-url' };
+    config.SOCIAL_MEDIA[SocialService.discord] = {
+      webhookUrl: 'webhook-url',
+    } as (typeof config.SOCIAL_MEDIA)[SocialService.discord];
 
     const result = await postToDiscord('content');
 

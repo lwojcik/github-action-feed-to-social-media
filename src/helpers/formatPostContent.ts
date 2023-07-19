@@ -10,7 +10,9 @@ export const formatPostContent = (content: FeedItem, postFormat: string) => {
     if (nestedTag.length === 2) {
       return acc.replace(
         `{${itemTag}}`,
-        (content[nestedTag[0]] as Record<string, any>)[nestedTag[1]] as string
+        (content[nestedTag[0]] as Record<string, string | number>)[
+          nestedTag[1]
+        ] as string
       );
     }
 

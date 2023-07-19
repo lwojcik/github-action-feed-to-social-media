@@ -86,7 +86,7 @@ To store sensitive information (e.g. access tokens) use [Encrypted Secrets](http
   - `latestDate` - item with the latest publication date regardless of its position in the entry array
   - `first` - first item in the feed in order of appearance
   - `last` - last item in the feed in order of appearance
-- `postFormat` - format string for new posts. Example: `New article: {article} \n\n {link} \n\n #someHashtag`. Default setting: `{title} {link}`
+- `postFormat` - format string for new posts used across all channels. Example: `New article: {article} \n\n {link} \n\n #someHashtag`. Default setting: `{title} {link}`
 
 ### Post formatting
 
@@ -94,6 +94,7 @@ You use either of the following tags for your custom post format (as long as you
 
 - `{title}`
 - `{link}`
+- `{description}`
 - `{category}`
 - `{pubDate}`
 - `{enclosure.url}`
@@ -109,6 +110,18 @@ You use either of the following tags for your custom post format (as long as you
 
 Found a missing property I should add? [Submit an issue!](https://github.com/lwojcik/github-action-feed-to-social-media/issues/new)
 
+### Per-channel post formats
+
+All channels (except Mastodon metadata) can use custom post format that overrides global `postFormat` setting. Thanks to that, it is possible to make better use of platform-specific features or increased character limits.
+
+For example, it is reasonable to use hashtags on Mastodon and Twitter: `New article: {title} {link} #some #hashtags`
+
+but skip them on Discord or Slack: `New article: {title} {link}`
+
+or alter the message altogether on channels that offer generous character limit: `New article: {title} {link} {description}`
+
+See the sections below on how to use this.
+
 ### Mastodon settings
 
 Posting to Mastodon is done by [masto](https://www.npmjs.com/package/masto) library.
@@ -116,6 +129,7 @@ Posting to Mastodon is done by [masto](https://www.npmjs.com/package/masto) libr
 To use this feature, create a new application in `Development` section of your profile settings and note down your access token.
 
 - `mastodonEnable` - enables / disables posting to Mastodon. Default: `false`
+- `mastodonPostFormat` - custom Mastodon post format. Optional. If used, it overrides `customPostFormat` setting
 - `mastodonInstance` - instance URL. Example: `https://mastodon.social`
 - `mastodonAccessToken` - access token for your Mastodon API app
 - `mastodonPostVisibility` - visibility setting for your posts. Defaults to `public`. Available options:
@@ -157,6 +171,7 @@ To post an update to a Twitter account you need to set up an app through [Twitte
 The Action was tested and confirmed to work against free tier of Twitter API v2 in June 2023.
 
 - `twitterEnable` - enables / disables posting to Twitter. Default: `false`
+- `twitterPostFormat` - custom Twitter post format. Optional. If used, it overrides `customPostFormat` setting
 - `twitterApiKey` - Twitter API key
 - `twitterApiKeySecret` - Twitter API key secret
 - `twiiterAccessToken` - Twitter access token for your app
@@ -174,6 +189,7 @@ To obtain a webhook URL follow the steps below:
 4. Adjust available webhook settings. When done, click **Copy Webhook URL** - that's the URL you have to provide for the Action to post on your channel.
 
 - `discordEnable` - enables / disables posting to Discord. Default: `false`
+- `discordPostFormat` - custom Discord message format. Optional. If used, it overrides `customPostFormat` setting
 - `discordWebhookUrl` - webhook URL to use for posting. Example: `https://discordapp.com/api/webhooks/123456`
 
 ### Slack settings
@@ -192,6 +208,7 @@ To obtain a webhook URL follow the steps below:
 8. You'll be redirected back to the Incoming Webhooks page. Copy the webhook URL from the table - that's the URL you provide to the Action.
 
 - `slackEnable` - enables / disables posting to Slack. Default: `false`
+- `slackPostFormat` - custom Discord message format. Optional. If used, it overrides `customPostFormat` setting
 - `slackWebhookUrl` - webhook URL to use for posting. Example: `https://hooks.slack.com/services/123/456`
 
 ## Output

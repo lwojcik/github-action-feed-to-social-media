@@ -14,7 +14,7 @@ export const postToSocialMedia = (params: {
 }) => {
   const { content, type } = params;
   const { link } = params.content;
-  const { POST_FORMAT } = config;
+  const { POST_FORMAT, SOCIAL_MEDIA } = config;
 
   if (!link) {
     logger.notice(
@@ -22,19 +22,42 @@ export const postToSocialMedia = (params: {
     );
   }
 
-  const formattedPost = formatPostContent(content, POST_FORMAT);
-
   switch (type) {
-    case SocialService.mastodon:
-      return postToMastodon(formattedPost);
+    case SocialService.mastodon: {
+      const mastodonPost = formatPostContent(
+        content,
+        SOCIAL_MEDIA.mastodon.postFormat || POST_FORMAT
+      );
+      return postToMastodon(mastodonPost);
+    }
+
     case SocialService.mastodonMetadata:
       return updateMastodonMetadata(link || '');
-    case SocialService.twitter:
-      return postToTwitter(formattedPost);
-    case SocialService.discord:
-      return postToDiscord(formattedPost);
-    case SocialService.slack:
-      return postToSlack(formattedPost);
+
+    case SocialService.twitter: {
+      const twitterPost = formatPostContent(
+        content,
+        SOCIAL_MEDIA.twitter.postFormat || POST_FORMAT
+      );
+      return postToTwitter(twitterPost);
+    }
+
+    case SocialService.discord: {
+      const post = formatPostContent(
+        content,
+        SOCIAL_MEDIA.discord.postFormat || POST_FORMAT
+      );
+      return postToDiscord(post);
+    }
+
+    case SocialService.slack: {
+      const slackPost = formatPostContent(
+        content,
+        SOCIAL_MEDIA.slack.postFormat || POST_FORMAT
+      );
+      return postToSlack(slackPost);
+    }
+
     default:
       throw new Error(
         `Unknown social media type: '${type}'. Available types: ${Object.keys(

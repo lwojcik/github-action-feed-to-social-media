@@ -38,6 +38,7 @@ const servicesToUpdate = {
 };
 
 const mastodonSettings = {
+  postFormat: getInput(ActionInput.mastodonPostFormat),
   instance: getInput(ActionInput.mastodonInstance),
   accessToken: getInput(ActionInput.mastodonAccessToken),
   postVisibility: getInput(
@@ -56,6 +57,7 @@ const mastodonMetadataSettings = {
 };
 
 const twitterSettings = {
+  postFormat: getInput(ActionInput.twitterPostFormat),
   apiKey: getInput(ActionInput.twitterApiKey),
   apiKeySecret: getInput(ActionInput.twitterApiKeySecret),
   accessToken: getInput(ActionInput.twitterAccessToken),
@@ -63,10 +65,12 @@ const twitterSettings = {
 };
 
 const discordSettings = {
+  postFormat: getInput(ActionInput.discordPostFormat),
   webhookUrl: getInput(ActionInput.discordWebhookUrl),
 };
 
 const slackSettings = {
+  postFormat: getInput(ActionInput.slackPostFormat),
   webhookUrl: getInput(ActionInput.slackWebhookUrl),
 };
 

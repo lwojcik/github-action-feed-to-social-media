@@ -14,6 +14,7 @@ export enum ActionInput {
   // Mastodon
   mastodonType = 'mastodonType',
   mastodonEnable = 'mastodonEnable',
+  mastodonPostFormat = 'mastodonPostFormat',
   mastodonInstance = 'mastodonInstance',
   mastodonAccessToken = 'mastodonAccessToken',
   mastodonPostVisibility = 'mastodonPostVisibility',
@@ -24,15 +25,18 @@ export enum ActionInput {
   mastodonMetadataFieldIndex = 'mastodonMetadataFieldIndex',
   // Twitter
   twitterEnable = 'twitterEnable',
+  twitterPostFormat = 'twitterPostFormat',
   twitterApiKey = 'twitterApiKey',
   twitterApiKeySecret = 'twitterApiKeySecret',
   twitterAccessToken = 'twitterAccessToken',
   twitterAccessTokenSecret = 'twitterAccessTokenSecret',
   // Discord
   discordEnable = 'discordEnable',
+  discordPostFormat = 'discordPostFormat',
   discordWebhookUrl = 'discordWebhookUrl',
   // Slack
   slackEnable = 'slackEnable',
+  slackPostFormat = 'slackPostFormat',
   slackWebhookUrl = 'slackWebhookUrl',
 }
 

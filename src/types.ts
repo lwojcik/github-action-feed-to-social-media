@@ -56,8 +56,46 @@ export enum NewestItemStrategy {
 
 export type TimestampInMiliseconds = number;
 
+export enum ExtraEntryField {
+  category = 'category',
+  pubDate = 'pubDate',
+  enclosure = 'enclosure',
+  itunesSubtitle = 'itunes:subtitle',
+  itunesImage = 'itunes:image',
+  itunesExplicit = 'itunes:explicit',
+  itunesKeywords = 'itunes:keywords',
+  itunesEpisodeType = 'itunes:episodeType',
+  itunesDuration = 'itunes:duration',
+  itunesEpisode = 'itunes:episode',
+}
+
+export enum ExtraEntryProperty {
+  text = '@_text',
+  href = '@_href',
+  url = '@_url',
+  type = '@_type',
+  length = '@_length',
+}
+
+export type Enclosure = {
+  url?: string;
+  length?: string;
+  type?: string;
+};
+
 export type FeedItem = Omit<FeedEntry, 'published'> & {
+  [key: string]: unknown;
   published: TimestampInMiliseconds;
+  [ExtraEntryField.category]?: string;
+  [ExtraEntryField.pubDate]?: string;
+  [ExtraEntryField.enclosure]?: Enclosure;
+  [ExtraEntryField.itunesSubtitle]?: string;
+  [ExtraEntryField.itunesImage]?: string;
+  [ExtraEntryField.itunesExplicit]?: string;
+  [ExtraEntryField.itunesKeywords]?: string;
+  [ExtraEntryField.itunesEpisodeType]?: string;
+  [ExtraEntryField.itunesDuration]?: string;
+  [ExtraEntryField.itunesEpisode]?: number;
 };
 
 export type PostedStatusUrl = string;

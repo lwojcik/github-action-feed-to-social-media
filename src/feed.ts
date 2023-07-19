@@ -1,12 +1,13 @@
-import { FeedEntry, extract } from '@extractus/feed-extractor';
+import { extract, ReaderOptions } from '@extractus/feed-extractor';
 import { FeedItem, NewestItemStrategy } from './types';
+import { getExtraEntryFields } from './helpers/getExtraEntryFields';
 import { logger } from './logger';
 
 export class Feed {
   url: string;
   strategy: NewestItemStrategy;
 
-  private items: FeedEntry[] | undefined;
+  private items: FeedItem[] | undefined;
 
   constructor(url: string, strategy = NewestItemStrategy.latestDate) {
     logger.info(`Setting up feed: ${url}`);
@@ -19,7 +20,19 @@ export class Feed {
 
   private async extract() {
     logger.debug(`Extracting feed: ${this.url}`);
-    this.items = (await extract(this.url)).entries;
+
+    const parserOptions = {
+      descriptionMaxLen: 999999,
+      xmlParserOptions: {
+        ignoreAttributes: false,
+        allowBooleanAttributes: true,
+        // attributeNamePrefix is hardcoded to be '@_'
+      },
+      getExtraEntryFields,
+    } as ReaderOptions;
+
+    this.items = (await extract(this.url, parserOptions))
+      .entries as unknown as FeedItem[];
     return this.items;
   }
 

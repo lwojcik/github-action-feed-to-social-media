@@ -22,7 +22,7 @@ This GitHub Action is heavily inspired by [Any Feed to Mastodon GitHub Action](h
 Below is a action workflow that uses all available options:
 
 ```yaml
-name: Feed to social Media
+name: Feed to social media
 on:
   workflow_dispatch:
 
@@ -87,6 +87,27 @@ To store sensitive information (e.g. access tokens) use [Encrypted Secrets](http
   - `first` - first item in the feed in order of appearance
   - `last` - last item in the feed in order of appearance
 - `postFormat` - format string for new posts. Example: `New article: {article} \n\n {link} \n\n #someHashtag`. Default setting: `{title} {link}`
+
+### Post formatting
+
+You use either of the following tags for your custom post format (as long as your feed items contain those properties):
+
+- `{title}`
+- `{link}`
+- `{category}`
+- `{pubDate}`
+- `{enclosure.url}`
+- `{enclosure.type}`
+- `{enclosure.length}`
+- `{itunes:subtitle}`
+- `{itunes:image}`
+- `{itunes:explicit}`
+- `{itunes:keywords}`
+- `{itunes:episodeType}`
+- `{itunes:duration}`
+- `{itunes:episode}`
+
+Found a missing property I should add? [Submit an issue!](https://github.com/lwojcik/github-action-feed-to-social-media/issues/new)
 
 ### Mastodon settings
 

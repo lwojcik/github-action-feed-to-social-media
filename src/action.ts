@@ -8,12 +8,10 @@ import {
   PostSubmitStatus,
   SocialService,
 } from './types';
+import { convertArrayToObject } from './helpers/convertArrayToObject';
+import { isFeedItemNewer } from './helpers/isFeedItemNewer';
+import { postToSocialMedia } from './helpers/postToSocialMedia';
 import { logger } from './logger';
-import {
-  convertArrayToObject,
-  isFeedItemNewer,
-  postToSocialMedia,
-} from './helpers';
 
 export const runAction = async () => {
   try {
@@ -61,7 +59,7 @@ export const runAction = async () => {
       const postStatuses = servicesToUpdate.map(async (service) => ({
         [service]: await postToSocialMedia({
           type: service,
-          content: feedItem,
+          content: feedItem as any,
         }),
       }));
 
@@ -69,7 +67,7 @@ export const runAction = async () => {
       const outputObject = convertArrayToObject(allSocialsUpdates);
 
       logger.info(`Updating cache with new feed item...`);
-      await cache.set(feedItem);
+      await cache.set(feedItem as any);
 
       setOutput(ActionOutput.updateStatus, JSON.stringify(outputObject));
 
@@ -82,7 +80,7 @@ export const runAction = async () => {
 
     if (!cachedItem) {
       logger.info(`Populating empty cache with fetched feed item...`);
-      await cache.set(feedItem);
+      await cache.set(feedItem as any);
     } else {
       logger.info('No new feed item detected. Exiting...');
     }

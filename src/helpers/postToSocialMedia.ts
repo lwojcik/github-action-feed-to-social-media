@@ -6,6 +6,7 @@ import { postToTwitter } from '../services/twitter';
 import { postToMastodon } from '../services/mastodon';
 import { config } from '../config';
 import { formatPostContent } from './formatPostContent';
+import { logger } from '../logger';
 
 export const postToSocialMedia = (params: {
   type: SocialService;
@@ -14,6 +15,12 @@ export const postToSocialMedia = (params: {
   const { content, type } = params;
   const { link } = params.content;
   const { POST_FORMAT } = config;
+
+  if (!link) {
+    logger.notice(
+      'Post link is empty. If you enabled Mastodon metadata update, it will not be triggered.'
+    );
+  }
 
   const formattedPost = formatPostContent(content, POST_FORMAT);
 

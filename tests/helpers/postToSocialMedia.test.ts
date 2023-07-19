@@ -73,6 +73,18 @@ describe('postToSocialMedia', () => {
     );
   });
 
+  it('skips updating Mastodon metadata if link is empty', () => {
+    const params = {
+      type: SocialService.mastodonMetadata,
+      content: {
+        title: 'Test Post',
+        link: '',
+      } as FeedItem,
+    };
+    postToSocialMedia(params);
+    expect(updateMastodonMetadata).toHaveBeenCalledWith('');
+  });
+
   it('posts to Discord when the social media type is Discord', () => {
     const params = {
       type: SocialService.discord,

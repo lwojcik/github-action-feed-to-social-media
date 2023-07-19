@@ -22,12 +22,14 @@ inputs:
     description: 'Name of the file where cache data is stored'
     default: 'feed-to-social-media.json'
   postFormat:
-    description: 'Format of the post. Available tags: {title} - post title, {link} - post URL'
+    description: 'Format of the post. See README for available tags'
     default: '{title} {link}'
   # Mastodon settings
   mastodonEnable:
     description: 'Enable posting to Mastodon?'
     default: 'false'
+  mastodonPostFormat:
+    description: 'Format of the Mastodon post. Overrides postFormat if used'
   mastodonInstance:
     description: 'URL of the Mastodon instance to which the status should be sent'
   mastodonAccessToken:
@@ -50,6 +52,8 @@ inputs:
   twitterEnable:
     description: 'Enable posting to Twitter?'
     default: 'false'
+  twitterPostFormat:
+    description: 'Format of the Twitter status. Overrides postFormat if used'
   twitterApiKey:
     description: 'Twitter API key'
   twitterApiKeySecret:
@@ -62,12 +66,16 @@ inputs:
   discordEnable:
     description: 'Enable posting to Discord?'
     default: 'false'
+  discordPostFormat:
+    description: 'Format of the Discord message. Overrides postFormat if used'
   discordWebhookUrl:
     description: 'Webhook URL to use for posting messages to Discord'
   # Slack settings
   slackEnable:
     description: 'Enable posting to Slack?'
     default: 'false'
+  slackPostFormat:
+    description: 'Format of the Slack message. Overrides postFormat if used'
   slackWebhookUrl:
     description: 'Webhook URL to use for posting messages to Slack'
 

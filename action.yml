@@ -114,4 +114,11 @@ runs:
       run: git pull
 
     - name: Commit and push cache changes
-      uses: stefanzweifel/git-auto-commit-action@v4
+      shell: bash
+      run: |
+        cd .
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add .
+        git diff --cached --exit-code || git commit -m "Update feed item cache" --author="${{ github.actor }}"
+        git push origin HEAD

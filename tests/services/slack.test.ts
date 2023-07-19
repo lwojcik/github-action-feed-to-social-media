@@ -83,7 +83,9 @@ describe('postToSlack', () => {
     const SlackMock = jest.fn().mockImplementation(() => slackInstance);
     jest.mock('../../src/services/slack', () => ({ Slack: SlackMock }));
 
-    config.SOCIAL_MEDIA[SocialService.slack] = { webhookUrl: 'webhook-url' };
+    config.SOCIAL_MEDIA[SocialService.slack] = {
+      webhookUrl: 'webhook-url',
+    } as (typeof config.SOCIAL_MEDIA)[SocialService.slack];
 
     const result = await postToSlack('content');
 

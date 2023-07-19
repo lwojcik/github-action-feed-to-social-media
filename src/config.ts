@@ -38,7 +38,9 @@ const servicesToUpdate = {
 };
 
 const mastodonSettings = {
-  postFormat: getInput(ActionInput.mastodonPostFormat),
+  postFormat: getInput(ActionInput.mastodonPostFormat, {
+    trimWhitespace: false,
+  }),
   instance: getInput(ActionInput.mastodonInstance),
   accessToken: getInput(ActionInput.mastodonAccessToken),
   postVisibility: getInput(
@@ -57,7 +59,9 @@ const mastodonMetadataSettings = {
 };
 
 const twitterSettings = {
-  postFormat: getInput(ActionInput.twitterPostFormat),
+  postFormat: getInput(ActionInput.twitterPostFormat, {
+    trimWhitespace: false,
+  }),
   apiKey: getInput(ActionInput.twitterApiKey),
   apiKeySecret: getInput(ActionInput.twitterApiKeySecret),
   accessToken: getInput(ActionInput.twitterAccessToken),
@@ -65,12 +69,16 @@ const twitterSettings = {
 };
 
 const discordSettings = {
-  postFormat: getInput(ActionInput.discordPostFormat),
+  postFormat: getInput(ActionInput.discordPostFormat, {
+    trimWhitespace: false,
+  }),
   webhookUrl: getInput(ActionInput.discordWebhookUrl),
 };
 
 const slackSettings = {
-  postFormat: getInput(ActionInput.slackPostFormat),
+  postFormat: getInput(ActionInput.slackPostFormat, {
+    trimWhitespace: false,
+  }),
   webhookUrl: getInput(ActionInput.slackWebhookUrl),
 };
 

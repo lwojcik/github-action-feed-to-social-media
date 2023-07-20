@@ -38,6 +38,7 @@ jobs:
           postFormat: "New post: {title}\n\n{link}"
           # Mastodon settings
           mastodonEnable: true
+          mastodonPostFormat: "New post: {title}\n\n{link}"
           mastodonInstance: 'https://mas.to'
           mastodonAccessToken: 'MASTODON_ACCESS_TOKEN'
           mastodonPostVisibility: 'unlisted'
@@ -48,15 +49,18 @@ jobs:
           mastodonMetadataFieldIndex: 0
           # Twitter settings
           twitterEnable: true
+          twitterPostFormat: "New post: {title}\n\n{link}"
           twitterApiKey: 'TWITTER_API_KEY'
           twitterApiKeySecret: 'TWITTER_API_SECRET'
           twitterAccessToken: 'TWITTER_ACCESS_TOKEN'
           twitterAccessTokenSecret: 'TWITTER_ACCESS_TOKEN_SECRET'
           # Discord settings
           discordEnable: true
+          discordPostFormat: "New post: {title}\n\n{link}"
           discordWebhookUrl: 'DISCORD_WEBHOOK_URL'
           # Slack settings
           slackEnable: true
+          slackPostFormat: "New post: {title}\n\n{link}"
           slackWebhookUrl: 'DISCORD_WEBHOOK_URL'
 ```
 

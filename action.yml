@@ -116,6 +116,7 @@ runs:
         INPUT_CACHEFILENAME: ${{ inputs.cacheFileName }}
         INPUT_POSTFORMAT: ${{ inputs.postFormat }}
         INPUT_MASTODONENABLE: ${{ inputs.mastodonEnable }}
+        INPUT_MASTODONPOSTFORMAT: ${{ inputs.mastodonPostFormat }}
         INPUT_MASTODONINSTANCE: ${{ inputs.mastodonInstance }}
         INPUT_MASTODONACCESSTOKEN: ${{ inputs.mastodonAccessToken }}
         INPUT_MASTODONPOSTVISIBILITY: ${{ inputs.mastodonPostVisibility }}
@@ -124,13 +125,16 @@ runs:
         INPUT_MASTODONMETADATAACCESSTOKEN: ${{ inputs.mastodonMetadataAccessToken }}
         INPUT_MASTODONMETADATAFIELDINDEX: ${{ inputs.mastodonMetadataFieldIndex }}
         INPUT_TWITTERENABLE: ${{ inputs.twitterEnable }}
+        INPUT_TWITTERPOSTFORMAT: ${{ inputs.twitterPostFormat }}
         INPUT_TWITTERAPIKEY: ${{ inputs.twitterApiKey }}
         INPUT_TWITTERAPIKEYSECRET: ${{ inputs.twitterApiKeySecret }}
         INPUT_TWITTERACCESSTOKEN: ${{ inputs.twitterAccessToken }}
         INPUT_TWITTERACCESSTOKENSECRET: ${{ inputs.twitterAccessTokenSecret }}
         INPUT_DISCORDENABLE: ${{ inputs.discordEnable }}
+        INPUT_DISCORDPOSTFORMAT: ${{ inputs.discordPostFormat }}
         INPUT_DISCORDWEBHOOKURL: ${{ inputs.discordWebhookUrl }}
         INPUT_SLACKENABLE: ${{ inputs.slackEnable }}
+        INPUT_SLACKPOSTFORMAT: ${{ inputs.slackPostFormat }}
         INPUT_SLACKWEBHOOKURL: ${{ inputs.slackWebhookUrl }}
         INPUT_BLUESKYENABLE: ${{ inputs.blueskyEnable }}
         INPUT_BLUESKYPOSTFORMAT: ${{ inputs.blueskyPostFormat }}

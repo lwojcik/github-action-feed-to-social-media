@@ -25,9 +25,11 @@ export class Bluesky implements SocialMediaService {
 
   private validateConfig() {
     return (
-      this.handle.length > 1 &&
+      this.handle.length > 0 &&
       this.handle.includes('.') &&
-      this.appPassword.length > 0
+      this.appPassword.length > 0 &&
+      this.ownerHandle.length > 0 &&
+      this.ownerContact.length > 0
     );
   }
 

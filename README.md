@@ -8,6 +8,7 @@ Supported platforms:
 - Twitter
 - Slack
 - Discord
+- Bluesky
 
 This GitHub Action is heavily inspired by [Any Feed to Mastodon GitHub Action](https://github.com/nhoizey/github-action-feed-to-mastodon) by [Nicolas Hoizey](https://github.com/nhoizey/github-action-feed-to-mastodon). However, there are significant scope and use case diffences between the two:
 
@@ -62,6 +63,13 @@ jobs:
           slackEnable: true
           slackPostFormat: "New post: {title}\n\n{link}"
           slackWebhookUrl: 'DISCORD_WEBHOOK_URL'
+          # Bluesky settings
+          blueskyEnable: true
+          blueskyPostFormat: "New post: {title}\n\n{link}"
+          blueskyHandle: 'user.bsky.social'
+          blueskyAppPassword: 'APP_PASSWORD'
+          blueskyOwnerHandle: 'owner.bsky.social'
+          bluskyOwnerContact: 'owner@example.org'
 ```
 
 Internally, the Action uses [actions/checkout](https://github.com/actions/checkout/) and basic Git features (committing and pushing changes to the repo it's run on) to restore and update the feed cache. This allows the Action to avoid posting duplicates.
@@ -215,6 +223,17 @@ To obtain a webhook URL follow the steps below:
 - `slackPostFormat` - custom Discord message format. Optional. If used, it overrides `customPostFormat` setting
 - `slackWebhookUrl` - webhook URL to use for posting. Example: `https://hooks.slack.com/services/123/456`
 
+### Bluesky settings
+
+Posting to Bluesky is done by [easy-bsky-bot-sdk](https://www.npmjs.com/package/easy-bsky-bot-sdk).
+
+- `blueskyEnable` - enables / disables posting to Bluesky. Default: `false`
+- `blueskyService` - Bluesky server to communicate with. Default: `bsky.social`
+- `blueskyHandle` - Bluesky account used to post
+- `blueskyAppPassword` - Bluesky app password. Obtain it from `Settings > App passwords`
+- `blueskyOwnerHandle` - your handle as an owner of the posting account. Together with `blueskyOwnerContact`, this information is used in bot's user-agent string, so it will be visible to the server owner (but it won't be displayed publicly)
+- `blueskyOwnerContact` - your contact information as an owner of the posting account
+
 ## Output
 
 The Action sets the output in a following format of a stringified JSON object:
@@ -242,7 +261,7 @@ See also [SocialService enum](https://github.com/lwojcik/github-action-feed-to-s
 - `notConfigured` - posting to the selected service is enabled, but configuration is incomplete (e.g. missing access key)
 - `updated` - new item was detected and the update was posted successfully (for services that don't expose post URLs, e.g. Mastodon metadata or Discord webooks),
 - `errored` - new item was detected and the update was posted, but it resulted in an error,
-- `skipped` - no new item was detected or “posting” was skipped for a different reason - see the log for information.
+- `skipped` - no new item was detected or posting was skipped for a different reason - see the log for information.
 
 See also [PostSubmitStatus enum](https://github.com/lwojcik/github-action-feed-to-social-media/blob/main/src/types.ts#L61).
 

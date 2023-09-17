@@ -78,7 +78,23 @@ inputs:
     description: 'Format of the Slack message. Overrides postFormat if used'
   slackWebhookUrl:
     description: 'Webhook URL to use for posting messages to Slack'
-
+  # Bluesky settings
+  blueskyEnable:
+    description: 'Enable posting to Bluesky?'
+    default: 'false'
+  blueskyPostFormat:
+    description: 'Format of the Bluesky message. Overrides postFormat if used'
+  blueskyService:
+    description: 'Bluesky server URL'
+    default: 'https://bsky.social'
+  blueskyHandle:
+    description: 'Bluesky handle to post to (e.g. myaccount.bsky.social)'
+  blueskyAppPassword:
+    description: 'Bluesky app password'
+  blueskyOwnerHandle:
+    description: 'Your handle as a bot owner. This info will go in the bot user-agent string, so it will be visible to the server you connect (not displayed publicly)'
+  blueskyOwnerContact:
+    description: 'Your contact info as a bot owner. This info will go in the bot user-agent string, so it will be visible to the server you connect (not displayed publicly)'
 outputs:
   updateStatus:
     description: 'Stringified object with update status'
@@ -116,6 +132,12 @@ runs:
         INPUT_DISCORDWEBHOOKURL: ${{ inputs.discordWebhookUrl }}
         INPUT_SLACKENABLE: ${{ inputs.slackEnable }}
         INPUT_SLACKWEBHOOKURL: ${{ inputs.slackWebhookUrl }}
+        INPUT_BLUESKYENABLE: ${{ inputs.blueskyEnable }}
+        INPUT_BLUESKYPOSTFORMAT: ${{ inputs.blueskyPostFormat }}
+        INPUT_BLUESKYHANDLE: ${{ inputs.blueskyHandle }}
+        INPUT_BLUESKYAPPPASSWORD: ${{ inputs.blueskyAppPassword }}
+        INPUT_BLUESKYOWNERHANDLE: ${{ inputs.blueskyOwnerHandle }}
+        INPUT_BLUESKYOWNERCONTACT: ${{ inputs.blueskyOwnerContact }}
 
     - name: Pull any changes from Git
       shell: bash

@@ -38,6 +38,14 @@ export enum ActionInput {
   slackEnable = 'slackEnable',
   slackPostFormat = 'slackPostFormat',
   slackWebhookUrl = 'slackWebhookUrl',
+  // Bluesky
+  blueskyEnable = 'blueskyEnable',
+  blueskyPostFormat = 'blueskyPostFormat',
+  blueskyService = 'blueskyService',
+  blueskyHandle = 'blueskyHandle',
+  blueskyAppPassword = 'blueskyAppPassword',
+  blueskyOwnerHandle = 'blueskyOwnerHandle',
+  blueskyOwnerContact = 'blueskyOwnerContact',
 }
 
 export enum ActionOutput {
@@ -50,6 +58,7 @@ export enum SocialService {
   twitter = 'twitter',
   discord = 'discord',
   slack = 'slack',
+  bluesky = 'bluesky',
 }
 
 export enum NewestItemStrategy {
@@ -149,4 +158,12 @@ export interface DiscordSettings {
 
 export interface SlackSettings {
   webhookUrl: string;
+}
+
+export interface BlueskySettings {
+  service?: string;
+  handle: string;
+  appPassword: string;
+  ownerHandle: string;
+  ownerContact: string;
 }

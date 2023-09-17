@@ -4,6 +4,7 @@ import { postToDiscord } from '../services/discord';
 import { postToSlack } from '../services/slack';
 import { postToTwitter } from '../services/twitter';
 import { postToMastodon } from '../services/mastodon';
+import { postToBluesky } from '../services/bluesky';
 import { config } from '../config';
 import { formatPostContent } from './formatPostContent';
 import { logger } from '../logger';
@@ -56,6 +57,14 @@ export const postToSocialMedia = (params: {
         SOCIAL_MEDIA.slack.postFormat || POST_FORMAT
       );
       return postToSlack(slackPost);
+    }
+
+    case SocialService.bluesky: {
+      const blueskyPost = formatPostContent(
+        content,
+        SOCIAL_MEDIA.bluesky.postFormat || POST_FORMAT
+      );
+      return postToBluesky(blueskyPost);
     }
 
     default:

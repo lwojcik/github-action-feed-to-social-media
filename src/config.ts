@@ -35,6 +35,7 @@ const servicesToUpdate = {
   [SocialService.twitter]: getBooleanInput(ActionInput.twitterEnable),
   [SocialService.discord]: getBooleanInput(ActionInput.discordEnable),
   [SocialService.slack]: getBooleanInput(ActionInput.slackEnable),
+  [SocialService.bluesky]: getBooleanInput(ActionInput.blueskyEnable),
 };
 
 const mastodonSettings = {
@@ -82,6 +83,17 @@ const slackSettings = {
   webhookUrl: getInput(ActionInput.slackWebhookUrl),
 };
 
+const blueskySettings = {
+  postFormat: getInput(ActionInput.blueskyPostFormat, {
+    trimWhitespace: false,
+  }),
+  service: getInput(ActionInput.blueskyService),
+  handle: getInput(ActionInput.blueskyHandle),
+  appPassword: getInput(ActionInput.blueskyAppPassword),
+  ownerHandle: getInput(ActionInput.blueskyOwnerHandle),
+  ownerContact: getInput(ActionInput.blueskyOwnerContact),
+};
+
 export const config = {
   ...feedSettings,
   ...cacheSettings,
@@ -93,5 +105,6 @@ export const config = {
     [SocialService.twitter]: twitterSettings,
     [SocialService.discord]: discordSettings,
     [SocialService.slack]: slackSettings,
+    [SocialService.bluesky]: blueskySettings,
   },
 };

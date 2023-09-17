@@ -4,6 +4,7 @@ import { postToMastodon } from '../../src/services/mastodon';
 import { updateMastodonMetadata } from '../../src/services/mastodon-metadata';
 import { postToDiscord } from '../../src/services/discord';
 import { postToSlack } from '../../src/services/slack';
+import { postToBluesky } from '../../src/services/bluesky';
 import { FeedItem, SocialService } from '../../src/types';
 
 jest.mock('../../src/services/twitter');
@@ -11,6 +12,7 @@ jest.mock('../../src/services/mastodon');
 jest.mock('../../src/services/mastodon-metadata');
 jest.mock('../../src/services/discord');
 jest.mock('../../src/services/slack');
+jest.mock('../../src/services/bluesky');
 
 jest.mock('@actions/core', () => ({
   info: () => jest.fn(),
@@ -103,6 +105,17 @@ describe('postToSocialMedia', () => {
     };
     postToSocialMedia(params);
     expect(postToSlack).toHaveBeenCalledWith(
+      expect.stringContaining('Test Post')
+    );
+  });
+
+  it('posts to Bluesky when the social media type is Bluesky', () => {
+    const params = {
+      type: SocialService.bluesky,
+      content: mockContent as FeedItem,
+    };
+    postToSocialMedia(params);
+    expect(postToBluesky).toHaveBeenCalledWith(
       expect.stringContaining('Test Post')
     );
   });

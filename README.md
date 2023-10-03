@@ -69,7 +69,7 @@ jobs:
           blueskyHandle: 'user.bsky.social'
           blueskyAppPassword: 'APP_PASSWORD'
           blueskyOwnerHandle: 'owner.bsky.social'
-          bluskyOwnerContact: 'owner@example.org'
+          blueskyOwnerContact: 'owner@example.org'
 ```
 
 Internally, the Action uses [actions/checkout](https://github.com/actions/checkout/) and basic Git features (committing and pushing changes to the repo it's run on) to restore and update the feed cache. This allows the Action to avoid posting duplicates.

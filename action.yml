@@ -13,7 +13,6 @@ inputs:
     required: true
   newestItemStrategy:
     description: 'Which item in the feed item array should be considered newest?'
-    required: true
     default: 'latestDate'
   cacheDirectory:
     description: 'Path to the directory where cache files are stored'
@@ -47,7 +46,6 @@ inputs:
     description: 'Access token for the Mastodon API on the instance where profile metadata should be updated'
   mastodonMetadataFieldIndex:
     description: 'Index of the existing profile metadata field that should be updated (starting at 0)'
-    required: true
   # Twitter settings
   twitterEnable:
     description: 'Enable posting to Twitter?'

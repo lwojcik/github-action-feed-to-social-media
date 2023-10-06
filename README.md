@@ -72,6 +72,8 @@ jobs:
           blueskyOwnerContact: 'owner@example.org'
 ```
 
+Before running the Action, make sure it has write permissions in your repository so that it can create and update feed cache. Go to your repository settings, select `Actions` > `General`, look for `Workflow permissions` section and make sure you have `Read and write` permissions selected.
+
 Internally, the Action uses [actions/checkout](https://github.com/actions/checkout/) and basic Git features (committing and pushing changes to the repo it's run on) to restore and update the feed cache. This allows the Action to avoid posting duplicates.
 
 The Action won't post anything if cache is empty (i.e. on first run or when you delete cache from the directory).

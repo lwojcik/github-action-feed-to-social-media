@@ -1,5 +1,7 @@
 # GitHub Action: Feed to Social Media
 
+> This project is no longer maintained or updated and it will be unpublished from GitHub Marketplace around 28 October 2024. Please update your workflows accordingly. In case of breaking changes, feel free to fork the repo and publish your own updated version.
+
 This GitHub Action selects latest item from RSS / Atom feed and posts it to one or more social media sites.
 
 Supported platforms:
@@ -278,27 +280,3 @@ Sample status:
   "slack": "updated"
 }
 ```
-
-## Infrequently Asked Questions
-
-1. **Can this Action support posting to [insert platform name here]?**
-
-General answer to this question is: **yes, as long as the platform offers publicly available API for posting text messages**. The architecture of the Action makes it possible to extend it with new services in a consistent way.
-
-**But.**
-
-If the platform is **Pixelfed, Instagram, TikTok** or any other platform focused on visuals rather than text - I'm not sure how to post text content to them.
-
-If the platform is **any ActivityPub-based platform other than Mastodon** - see the first paragraph and consider [submitting an issue](https://github.com/lwojcik/github-action-feed-to-social-media/issues) if you want to see it added.
-
-If the platform is **Kbin** - I'm not aware of posting API being available (I only know of read-only APIs which are irrelevant for this Action). I like Kbin and do use Kbin myself. I don't exclude revisiting this in the future.
-
-If the platform is **Lemmy** - so far I didn't have personal interest in supporting it but [that seems to be doable](https://join-lemmy.org/docs/en/contributors/04-api.html). Consider [submitting an issue](https://github.com/lwojcik/github-action-feed-to-social-media/issues) if you want to see it added.
-
-If the platform is **LinkedIn** - I explored LinkedIn API and at some point I had a nearly complete implementation of automated posting to a company page. However, some crucial features of their API (such as generating OAuth access tokens) are locked behind manually approved request forms or vague "Contact your local salesperson" statements. I cannot offer a feature if I can't give it full testing. Getting through approval stage consumes time and thus it's a bit out of my personal interest scope. If you're interested in seeing this feature, [consider sponsoring its development](https://github.com/sponsors/lwojcik).
-
-If the the platform wasn't mentioned above - I either didn't consider it (I didn't know of its existence?) or it doesn't offer API to send posts. Want to see it? Consider [opening an issue](https://github.com/lwojcik/github-action-feed-to-social-media/issues).
-
-## License
-
-Licensed under MIT License. See [LICENSE](./LICENSE) for more information.

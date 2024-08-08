@@ -2,7 +2,7 @@
   "name": "github-action-feed-to-social-media",
   "version": "2.4.0",
   "private": true,
-  "description": "Post latest RSS / Atom feed item to multiple social platforms (e.g. Mastodon, Twitter, Discord)",
+  "description": "Post latest RSS / Atom feed item to multiple social platforms",
   "main": "dist/index.js",
   "scripts": {
     "start": "npx ncc run ./src/index.ts",
@@ -15,28 +15,6 @@
     "test:cov": "jest --coverage --collectCoverageFrom='src/**/*.ts'",
     "all": "npm run format && npm run lint && npm test && npm run build && npm run package"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lwojcik/github-action-feed-to-social-media.git"
-  },
-  "keywords": [
-    "actions",
-    "github-action",
-    "mastodon",
-    "twitter",
-    "discord",
-    "slack",
-    "fediverse",
-    "posse",
-    "rss",
-    "atom",
-    "feed"
-  ],
-  "author": {
-    "name": "Łukasz Wójcik",
-    "url": "https://github.com/lwojcik"
-  },
-  "license": "MIT",
   "devDependencies": {
     "@actions/core": "^1.10.0",
     "@actions/io": "^1.1.3",
